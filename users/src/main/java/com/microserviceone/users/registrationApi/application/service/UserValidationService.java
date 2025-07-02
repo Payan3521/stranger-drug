@@ -1,0 +1,136 @@
+package com.microserviceone.users.registrationApi.application.service;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.HttpClientErrorException;
+import com.microserviceone.users.core.logging.LoggingService;
+import com.microserviceone.users.registrationApi.application.exception.UserPrerequisitesNotMetException;
+import com.microserviceone.users.registrationApi.web.dto.ApiResponse;
+import com.microserviceone.users.termsAndConditionsApi.web.dto.AcceptedMultipleRequest;
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class UserValidationService {
+    
+    private final RestTemplate restTemplate;
+    private final LoggingService loggingService;
+    private final TermsRetrievalService termsRetrievalService;
+    
+    @Value("${server.port:8082}")
+    private String serverPort;
+    
+    private String getBaseUrl() {
+        return "http://localhost:" + serverPort;
+    }
+    
+    /**
+     * Acepta los términos y condiciones para un usuario recién registrado
+     */
+    public void acceptTermsAndConditions(Long userId, String userEmail) {
+        try {
+            loggingService.logInfo("Aceptando términos y condiciones para usuario ID: {}, Email: {}", userId, userEmail);
+            
+            String url = getBaseUrl() + "/terms/accept/multiple";
+            
+            // Crear el request para aceptar múltiples términos
+            AcceptedMultipleRequest request = new AcceptedMultipleRequest();
+            request.setUserId(userId);
+            request.setUserEmail(userEmail);
+            request.setTermIds(termsRetrievalService.getActiveTermIds());
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setBearerAuth("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwicm9sIjoiQURNSU4ifQ.HwTopleWIIp9npTrGeh2s_uQInqfeyJgUhkxxEbf58A"); // O usa el método adecuado para obtener el token
+            headers.set("X-App-Client-Key", "A1g2u3d4e5l6o7EAM_b1e2d3o4y5a6J5U6n7t8o9s3-2025-2006"); // Cambia el nombre del header si es diferente
+
+            HttpEntity<AcceptedMultipleRequest> entity = new HttpEntity<>(request, headers);
+            
+
+            ResponseEntity<ApiResponse> response = restTemplate.postForEntity(url, entity, ApiResponse.class);
+            
+            if (response.getStatusCode() == HttpStatus.OK) {
+                loggingService.logInfo("Términos y condiciones aceptados exitosamente para usuario ID: {}", userId);
+            } else {
+                loggingService.logError("Error al aceptar términos y condiciones para usuario ID: {}", userId);
+                throw new UserPrerequisitesNotMetException("Error al aceptar términos y condiciones");
+            }
+            
+        } catch (HttpClientErrorException e) {
+            loggingService.logError("Error HTTP al aceptar términos y condiciones para usuario ID: {} - Status: {}", 
+                userId, e.getStatusCode());
+            throw new UserPrerequisitesNotMetException("Error al aceptar términos y condiciones: " + e.getMessage(), e);
+        } catch (Exception e) {
+            loggingService.logError("Error inesperado al aceptar términos y condiciones para usuario ID: {}", userId, e);
+            throw new UserPrerequisitesNotMetException("Error al aceptar términos y condiciones: " + e.getMessage(), e);
+        }
+    }
+    
+    /**
+     * Valida que el email haya sido verificado
+     */
+    public void validateEmailVerification(String email) {
+        try {
+            loggingService.logInfo("Validando verificación de email: {}", email);
+            
+            String url = getBaseUrl() + "/verification/status";
+            SendCodeRequest request = new SendCodeRequest();
+            request.setEmail(email);
+            
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setBearerAuth("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwicm9sIjoiQURNSU4ifQ.HwTopleWIIp9npTrGeh2s_uQInqfeyJgUhkxxEbf58A"); // O usa el método adecuado para obtener el token
+            headers.set("X-App-Client-Key", "A1g2u3d4e5l6o7EAM_b1e2d3o4y5a6J5U6n7t8o9s3-2025-2006"); // Cambia el nombre del header si es diferente
+
+            HttpEntity<SendCodeRequest> entity = new HttpEntity<>(request, headers);
+
+            ResponseEntity<ApiResponse> response = restTemplate.postForEntity(url, entity, ApiResponse.class);
+            
+            if (response.getStatusCode() == HttpStatus.OK) {
+                loggingService.logInfo("Email verificado exitosamente: {}", email);
+            } else {
+                loggingService.logError("Error al validar verificación de email: {}", email);
+                throw new UserPrerequisitesNotMetException("El email no ha sido verificado");
+            }
+            
+        } catch (HttpClientErrorException e) {
+            loggingService.logError("Error HTTP al validar verificación de email: {} - Status: {}", 
+                email, e.getStatusCode());
+            throw new UserPrerequisitesNotMetException("El email no ha sido verificado: " + e.getMessage(), e);
+        } catch (Exception e) {
+            loggingService.logError("Error inesperado al validar verificación de email: {}", email, e);
+            throw new UserPrerequisitesNotMetException("Error al validar verificación de email: " + e.getMessage(), e);
+        }
+    }
+    
+    /**
+     * Valida solo la verificación de email (los términos se aceptan después del registro)
+     */
+    public void validateUserPrerequisites(String email) {
+        loggingService.logInfo("Iniciando validación de email previa al registro para email: {}", email);
+        
+        // Validar verificación de email
+        validateEmailVerification(email);
+        
+        loggingService.logInfo("Validación de email completada exitosamente para email: {}", email);
+    }
+    
+    // Clase auxiliar para la petición de verificación de email
+    public static class SendCodeRequest {
+        private String email;
+        
+        public String getEmail() {
+            return email;
+        }
+        
+        public void setEmail(String email) {
+            this.email = email;
+        }
+    }
+} 
