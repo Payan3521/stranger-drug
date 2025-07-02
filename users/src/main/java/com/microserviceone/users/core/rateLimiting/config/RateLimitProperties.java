@@ -37,8 +37,8 @@ public class RateLimitProperties {
         endpointLimits.put("terms_get_by_type", 20);         // 20 solicitudes en 1 minuto
         endpointLimits.put("terms_get_all", 20);             // 20 solicitudes en 1 minuto
         endpointLimits.put("terms_get_by_id", 20);           // 20 solicitudes en 1 minuto
-        endpointLimits.put("terms_accept_single", 3);        // 3 solicitudes en 1 minuto
-        endpointLimits.put("terms_accept_multiple", 3);      // 3 solicitudes en 1 minuto
+        endpointLimits.put("terms_accept_single", 5);        // 3 solicitudes en 1 minuto
+        endpointLimits.put("terms_accept_multiple", 5);      // 3 solicitudes en 1 minuto
         endpointLimits.put("terms_verify_acceptance", 5);    // 5 solicitudes en 1 minuto
         endpointLimits.put("terms_verify_by_email", 5);      // 5 solicitudes en 1 minuto
         

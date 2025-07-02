@@ -73,7 +73,7 @@ public class TermController {
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Solicitud inválida: ID de término no proporcionado o usuario no encontrado"),
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
-    @RateLimit(key = "terms_accept_single", maxRequests = 3, description = "Aceptar término individual - 3 solicitudes por minuto")
+    @RateLimit(key = "terms_accept_single", maxRequests = 5, description = "Aceptar término individual - 3 solicitudes por minuto")
     @PostMapping("/accept")
     public ResponseEntity<ApiResponse<Accepted>> acceptTerm(
             @Valid @RequestBody AcceptedRequest request,
@@ -92,7 +92,7 @@ public class TermController {
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Solicitud inválida: IDs de términos no proporcionados o usuario no encontrado"),
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
-    @RateLimit(key = "terms_accept_multiple", maxRequests = 3, description = "Aceptar múltiples términos - 3 solicitudes por minuto")
+    @RateLimit(key = "terms_accept_multiple", maxRequests = 5, description = "Aceptar múltiples términos - 3 solicitudes por minuto")
     @PostMapping("/accept/multiple")
     public ResponseEntity<ApiResponse<List<Accepted>>> acceptMultipleTerms(
             @Valid @RequestBody AcceptedMultipleRequest request,
