@@ -1,11 +1,7 @@
 package com.microserviceone.users.registrationApi.application.service;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -24,6 +20,7 @@ public class TermsRetrievalService {
     
     private final RestTemplate restTemplate;
     private final LoggingService loggingService;
+    private final ObjectMapper objectMapper;
     
     @Value("${server.port:8082}")
     private String serverPort;
@@ -49,8 +46,7 @@ public class TermsRetrievalService {
             loggingService.logDebug("Response Body: {}", response.getBody());
 
             if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
-                ObjectMapper mapper = new ObjectMapper();
-                ApiResponse<List<TermResponse>> apiResponse = mapper.readValue(
+                ApiResponse<List<TermResponse>> apiResponse = objectMapper.readValue(
                     response.getBody(),
                     new TypeReference<ApiResponse<List<TermResponse>>>() {}
                 );

@@ -36,6 +36,7 @@ public class JwtGatewayFilter implements GlobalFilter, Ordered {
             return Mono.error(new NoTokenException());
         }
 
+        
         try {
             String jwt = authHeader.substring(7);
             Key key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
