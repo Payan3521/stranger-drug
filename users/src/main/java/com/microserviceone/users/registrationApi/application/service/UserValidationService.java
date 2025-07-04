@@ -45,14 +45,12 @@ public class UserValidationService {
             request.setUserEmail(userEmail);
             request.setTermIds(termsRetrievalService.getActiveTermIds());
 
+            // Solo Content-Type, sin autenticación
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.setBearerAuth("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwicm9sIjoiQURNSU4ifQ.HwTopleWIIp9npTrGeh2s_uQInqfeyJgUhkxxEbf58A"); // O usa el método adecuado para obtener el token
-            headers.set("X-App-Client-Key", "A1g2u3d4e5l6o7EAM_b1e2d3o4y5a6J5U6n7t8o9s3-2025-2006"); // Cambia el nombre del header si es diferente
 
             HttpEntity<AcceptedMultipleRequest> entity = new HttpEntity<>(request, headers);
             
-
             ResponseEntity<ApiResponse> response = restTemplate.postForEntity(url, entity, ApiResponse.class);
             
             if (response.getStatusCode() == HttpStatus.OK) {
@@ -71,7 +69,7 @@ public class UserValidationService {
             throw new UserPrerequisitesNotMetException("Error al aceptar términos y condiciones: " + e.getMessage(), e);
         }
     }
-    
+
     /**
      * Valida que el email haya sido verificado
      */
@@ -83,10 +81,9 @@ public class UserValidationService {
             SendCodeRequest request = new SendCodeRequest();
             request.setEmail(email);
             
+            // Solo Content-Type, sin autenticación
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.setBearerAuth("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwicm9sIjoiQURNSU4ifQ.HwTopleWIIp9npTrGeh2s_uQInqfeyJgUhkxxEbf58A"); // O usa el método adecuado para obtener el token
-            headers.set("X-App-Client-Key", "A1g2u3d4e5l6o7EAM_b1e2d3o4y5a6J5U6n7t8o9s3-2025-2006"); // Cambia el nombre del header si es diferente
 
             HttpEntity<SendCodeRequest> entity = new HttpEntity<>(request, headers);
 

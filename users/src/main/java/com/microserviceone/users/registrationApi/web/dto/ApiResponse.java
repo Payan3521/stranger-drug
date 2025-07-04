@@ -2,6 +2,7 @@ package com.microserviceone.users.registrationApi.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 /**
@@ -12,13 +13,14 @@ import java.time.LocalDateTime;
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@NoArgsConstructor
 public class ApiResponse<T> {
     
-    private final boolean success;
-    private final String message;
-    private final T data;
-    private final String errorCode;
-    private final LocalDateTime timestamp;
+    private boolean success;
+    private String message;
+    private T data;
+    private String errorCode;
+    private LocalDateTime timestamp;
 
     private ApiResponse(boolean success, String message, T data, String errorCode) {
         this.success = success;

@@ -40,36 +40,42 @@ public class TermsRetrievalService {
             loggingService.logDebug("Obteniendo términos activos");
             
             String url = getBaseUrl() + "/terms";
-    
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.setBearerAuth("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwicm9sIjoiQURNSU4ifQ.HwTopleWIIp9npTrGeh2s_uQInqfeyJgUhkxxEbf58A"); // JWT
-            headers.set("X-App-Client-Key", "A1g2u3d4e5l6o7EAM_b1e2d3o4y5a6J5U6n7t8o9s3-2025-2006"); // Clave secreta
-    
-            HttpEntity<Void> entity = new HttpEntity<>(headers);
-    
-            ResponseEntity<String> response = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                entity,
-                String.class
-            );
-    
+            loggingService.logDebug("URL llamada: {}", url);
+
+            // Sin cabeceras de autenticación
+            ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+
+            loggingService.logDebug("Status Code: {}", response.getStatusCode());
+            loggingService.logDebug("Response Body: {}", response.getBody());
+
             if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
                 ObjectMapper mapper = new ObjectMapper();
-                // Usa TypeReference para mapear la respuesta genérica
                 ApiResponse<List<TermResponse>> apiResponse = mapper.readValue(
                     response.getBody(),
                     new TypeReference<ApiResponse<List<TermResponse>>>() {}
                 );
+                
+                loggingService.logDebug("ApiResponse success: {}", apiResponse.isSuccess());
+                loggingService.logDebug("ApiResponse message: {}", apiResponse.getMessage());
+                
                 List<TermResponse> terms = apiResponse.getData();
+                loggingService.logDebug("Terms obtenidos: {}", terms != null ? terms.size() : 0);
+                
                 if (terms != null && !terms.isEmpty()) {
-                    return terms.stream().map(TermResponse::getId).collect(Collectors.toList());
+                    for (TermResponse term : terms) {
+                        loggingService.logDebug("Término encontrado - ID: {}, Título: {}, Activo: {}", 
+                            term.getId(), term.getTitle(), term.isActive());
+                    }
+                    
+                    List<Long> termIds = terms.stream().map(TermResponse::getId).collect(Collectors.toList());
+                    loggingService.logDebug("IDs de términos activos: {}", termIds);
+                    return termIds;
                 }
             }
+            
             loggingService.logWarning("No se encontraron términos activos, usando término por defecto");
             return List.of(1L);
-    
+
         } catch (Exception e) {
             loggingService.logError("Error al obtener términos activos, usando término por defecto", e);
             return List.of(1L);
