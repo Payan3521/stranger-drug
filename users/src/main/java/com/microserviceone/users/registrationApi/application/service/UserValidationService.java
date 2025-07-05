@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.client.HttpClientErrorException;
+
+import com.microserviceone.users.core.config.internalSecurity.InternalJwtService;
 import com.microserviceone.users.core.logging.LoggingService;
 import com.microserviceone.users.registrationApi.application.exception.UserPrerequisitesNotMetException;
 import com.microserviceone.users.registrationApi.web.dto.ApiResponse;
@@ -22,6 +24,7 @@ public class UserValidationService {
     private final RestTemplate restTemplate;
     private final LoggingService loggingService;
     private final TermsRetrievalService termsRetrievalService;
+    private final InternalJwtService internalJwtService;
     
     @Value("${server.port:8082}")
     private String serverPort;
@@ -45,9 +48,13 @@ public class UserValidationService {
             request.setUserEmail(userEmail);
             request.setTermIds(termsRetrievalService.getActiveTermIds());
 
+            String jwt = internalJwtService.generateToken("user-service");
+
             // Solo Content-Type, sin autenticación
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setBearerAuth(jwt);
+            System.out.println("jwt" + jwt);
 
             HttpEntity<AcceptedMultipleRequest> entity = new HttpEntity<>(request, headers);
             
@@ -80,14 +87,24 @@ public class UserValidationService {
             String url = getBaseUrl() + "/verification/status";
             SendCodeRequest request = new SendCodeRequest();
             request.setEmail(email);
+
+            String jwt = internalJwtService.generateToken("user-service");
             
-            // Solo Content-Type, sin autenticación
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setBearerAuth(jwt);
+            
+            // LOG PARA DEBUG
+            System.out.println("[UserValidationService] Generated JWT: " + jwt.substring(0, Math.min(20, jwt.length())) + "...");
+            System.out.println("[UserValidationService] Calling URL: " + url);
+            System.out.println("[UserValidationService] Request payload: " + request.getEmail());
 
             HttpEntity<SendCodeRequest> entity = new HttpEntity<>(request, headers);
 
             ResponseEntity<ApiResponse> response = restTemplate.postForEntity(url, entity, ApiResponse.class);
+            
+            System.out.println("[UserValidationService] Response status: " + response.getStatusCode());
+            System.out.println("[UserValidationService] Response body: " + response.getBody());
             
             if (response.getStatusCode() == HttpStatus.OK) {
                 loggingService.logInfo("Email verificado exitosamente: {}", email);
@@ -99,6 +116,7 @@ public class UserValidationService {
         } catch (HttpClientErrorException e) {
             loggingService.logError("Error HTTP al validar verificación de email: {} - Status: {}", 
                 email, e.getStatusCode());
+            System.out.println("[UserValidationService] HTTP Error: " + e.getResponseBodyAsString());
             throw new UserPrerequisitesNotMetException("El email no ha sido verificado: " + e.getMessage(), e);
         } catch (Exception e) {
             loggingService.logError("Error inesperado al validar verificación de email: {}", email, e);
