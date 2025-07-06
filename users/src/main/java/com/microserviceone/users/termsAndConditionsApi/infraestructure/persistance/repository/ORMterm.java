@@ -13,4 +13,4 @@ public interface ORMterm  extends JpaRepository<TermAndConditionEntity, Long> {
     
     @Query("SELECT t FROM TermAndConditionEntity t WHERE t.active = true AND t.type = ?1 ORDER BY t.createTerm DESC")
     Optional<TermAndConditionEntity> findActiveTermByType(String type);
-} 
+}
