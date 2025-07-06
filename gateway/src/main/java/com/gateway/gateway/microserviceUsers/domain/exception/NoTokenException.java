@@ -1,4 +1,4 @@
-package com.gateway.gateway.domain.exception;
+package com.gateway.gateway.microserviceUsers.domain.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

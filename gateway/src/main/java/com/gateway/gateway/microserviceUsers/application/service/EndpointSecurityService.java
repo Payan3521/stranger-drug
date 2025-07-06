@@ -1,10 +1,10 @@
-package com.gateway.gateway.application.service;
+package com.gateway.gateway.microserviceUsers.application.service;
 
 import java.util.Arrays;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import com.gateway.gateway.domain.port.IEndpointSecurityService;
+import com.gateway.gateway.microserviceUsers.domain.port.IEndpointSecurityService;
 
 @Slf4j
 @Service

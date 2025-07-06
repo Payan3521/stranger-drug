@@ -1,4 +1,4 @@
-package com.gateway.gateway.domain.model;
+package com.gateway.gateway.microserviceUsers.domain.model;
 
 import lombok.Builder;
 import lombok.Getter;

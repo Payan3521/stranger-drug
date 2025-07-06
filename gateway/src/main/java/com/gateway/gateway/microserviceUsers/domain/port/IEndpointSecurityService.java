@@ -1,4 +1,4 @@
-package com.gateway.gateway.domain.port;
+package com.gateway.gateway.microserviceUsers.domain.port;
 
 public interface IEndpointSecurityService {
     boolean isPublicEndpoint(String path, String method);

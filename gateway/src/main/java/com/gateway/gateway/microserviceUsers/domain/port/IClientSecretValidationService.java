@@ -1,4 +1,4 @@
-package com.gateway.gateway.domain.port;
+package com.gateway.gateway.microserviceUsers.domain.port;
 
 public interface IClientSecretValidationService {
     boolean isValidClientSecret(String clientSecret);

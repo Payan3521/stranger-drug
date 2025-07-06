@@ -1,4 +1,4 @@
-package com.gateway.gateway.infraestructure.security;
+package com.gateway.gateway.microserviceUsers.infraestructure.security;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -7,11 +7,11 @@ import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
-import com.gateway.gateway.domain.exception.NoAdminAccessException;
-import com.gateway.gateway.domain.exception.NoTokenException;
-import com.gateway.gateway.domain.model.UserContext;
-import com.gateway.gateway.domain.port.IEndpointSecurityService;
-import com.gateway.gateway.domain.port.IJwtValidationService;
+import com.gateway.gateway.microserviceUsers.domain.exception.NoAdminAccessException;
+import com.gateway.gateway.microserviceUsers.domain.exception.NoTokenException;
+import com.gateway.gateway.microserviceUsers.domain.model.UserContext;
+import com.gateway.gateway.microserviceUsers.domain.port.IEndpointSecurityService;
+import com.gateway.gateway.microserviceUsers.domain.port.IJwtValidationService;
 import reactor.core.publisher.Mono;
 
 @Slf4j

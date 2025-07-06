@@ -1,4 +1,4 @@
-package com.gateway.gateway.application.service;
+package com.gateway.gateway.microserviceUsers.application.service;
 
 import java.security.Key;
 import io.jsonwebtoken.Claims;
@@ -7,9 +7,9 @@ import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import com.gateway.gateway.domain.exception.InvalidTokenException;
-import com.gateway.gateway.domain.model.UserContext;
-import com.gateway.gateway.domain.port.IJwtValidationService;
+import com.gateway.gateway.microserviceUsers.domain.exception.InvalidTokenException;
+import com.gateway.gateway.microserviceUsers.domain.model.UserContext;
+import com.gateway.gateway.microserviceUsers.domain.port.IJwtValidationService;
 import java.nio.charset.StandardCharsets;
 
 @Slf4j

@@ -1,4 +1,4 @@
-package com.gateway.gateway.infraestructure.exception;
+package com.gateway.gateway.microserviceUsers.infraestructure.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,10 +8,10 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
-import com.gateway.gateway.domain.exception.AccessErrorException;
-import com.gateway.gateway.domain.exception.InvalidTokenException;
-import com.gateway.gateway.domain.exception.NoAdminAccessException;
-import com.gateway.gateway.domain.exception.NoTokenException;
+import com.gateway.gateway.microserviceUsers.domain.exception.AccessErrorException;
+import com.gateway.gateway.microserviceUsers.domain.exception.InvalidTokenException;
+import com.gateway.gateway.microserviceUsers.domain.exception.NoAdminAccessException;
+import com.gateway.gateway.microserviceUsers.domain.exception.NoTokenException;
 import io.netty.handler.timeout.TimeoutException;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;

@@ -1,4 +1,4 @@
-package com.gateway.gateway.infraestructure.config;
+package com.gateway.gateway.microserviceUsers.infraestructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

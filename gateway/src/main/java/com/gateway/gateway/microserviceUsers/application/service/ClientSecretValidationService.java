@@ -1,9 +1,9 @@
-package com.gateway.gateway.application.service;
+package com.gateway.gateway.microserviceUsers.application.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import com.gateway.gateway.domain.port.IClientSecretValidationService;
+import com.gateway.gateway.microserviceUsers.domain.port.IClientSecretValidationService;
 
 @Slf4j
 @Service

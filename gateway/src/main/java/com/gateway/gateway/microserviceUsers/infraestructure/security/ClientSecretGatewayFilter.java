@@ -1,4 +1,4 @@
-package com.gateway.gateway.infraestructure.security;
+package com.gateway.gateway.microserviceUsers.infraestructure.security;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -7,8 +7,8 @@ import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
-import com.gateway.gateway.application.service.ClientSecretValidationService;
-import com.gateway.gateway.domain.exception.AccessErrorException;
+import com.gateway.gateway.microserviceUsers.application.service.ClientSecretValidationService;
+import com.gateway.gateway.microserviceUsers.domain.exception.AccessErrorException;
 import reactor.core.publisher.Mono;
 
 @Slf4j
