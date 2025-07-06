@@ -1,4 +1,4 @@
-package com.gateway.gateway.jwt.exception;
+package com.gateway.gateway.domain.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -9,5 +9,8 @@ import lombok.Getter;
 public class NoTokenException extends RuntimeException{
     public NoTokenException() {
         super("Debes ingresar un token de acceso");
+    }
+    public NoTokenException(String message) {
+        super(message);
     }
 }
