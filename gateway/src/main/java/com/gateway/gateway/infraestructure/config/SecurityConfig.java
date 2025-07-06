@@ -1,4 +1,4 @@
-package com.gateway.gateway.jwt.config;
+package com.gateway.gateway.infraestructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +15,7 @@ public class SecurityConfig {
         return http
             .csrf(csrf -> csrf.disable())
             .authorizeExchange(exchanges -> exchanges
-                // Permitir todos los endpoints - la autenticación se maneja en JwtGatewayFilter
+                // Permitir todos los endpoints - la autenticación se maneja en los filtros personalizados
                 .anyExchange().permitAll()
             )
             .build();
