@@ -2,13 +2,19 @@ package com.gateway.gateway.microserviceUsers.application.service;
 
 import java.util.Arrays;
 import java.util.List;
+
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import com.gateway.gateway.microserviceUsers.domain.port.IEndpointSecurityService;
+import com.gateway.gateway.common.logging.LoggingService;
 
 @Slf4j
+@RequiredArgsConstructor
 @Service
 public class EndpointSecurityService implements IEndpointSecurityService {
+
+    private final LoggingService loggingService;
 
     private static final List<String> PUBLIC_POST_ENDPOINTS = Arrays.asList(
         "/users/terms/accept",
@@ -25,14 +31,15 @@ public class EndpointSecurityService implements IEndpointSecurityService {
         "/api-docs"
     );
 
+
     @Override
     public boolean isPublicEndpoint(String path, String method) {
-        log.debug("Verificando si es endpoint público: {} {}", method, path);
+        loggingService.logGatewayDebug("EndpointSecurityService: Verificando si es endpoint público - Método: {}, Path: {}", method, path);
 
         // Endpoints de documentación y monitoreo
         for (String prefix : PUBLIC_PATH_PREFIXES) {
             if (path.startsWith(prefix)) {
-                log.debug("Endpoint público por prefijo: {}", prefix);
+                loggingService.logGatewayDebug("EndpointSecurityService: Endpoint público por prefijo: {} - Path: {}", prefix, path);
                 return true;
             }
         }
@@ -41,22 +48,31 @@ public class EndpointSecurityService implements IEndpointSecurityService {
         if ("POST".equals(method)) {
             boolean isPublic = PUBLIC_POST_ENDPOINTS.contains(path);
             if (isPublic) {
-                log.debug("Endpoint público POST: {}", path);
+                loggingService.logGatewayDebug("EndpointSecurityService: Endpoint público POST encontrado: {}", path);
+            } else {
+                loggingService.logGatewayDebug("EndpointSecurityService: Endpoint POST no es público: {}", path);
             }
             return isPublic;
         }
 
+        loggingService.logGatewayDebug("EndpointSecurityService: Endpoint no es público - Método: {}, Path: {}", method, path);
         return false;
     }
 
     @Override
     public boolean requiresAuthentication(String path, String method) {
-        return !isPublicEndpoint(path, method);
+        boolean requiresAuth = !isPublicEndpoint(path, method);
+        loggingService.logGatewayDebug("EndpointSecurityService: Endpoint requiere autenticación: {} - Método: {}, Path: {}", 
+            requiresAuth ? "SÍ" : "NO", method, path);
+        return requiresAuth;
     }
 
     @Override
     public boolean requiresAdminRole(String path, String method) {
         // Todos los endpoints no públicos requieren rol ADMIN
-        return requiresAuthentication(path, method);
+        boolean requiresAdmin = requiresAuthentication(path, method);
+        loggingService.logGatewayDebug("EndpointSecurityService: Endpoint requiere rol ADMIN: {} - Método: {}, Path: {}", 
+            requiresAdmin ? "SÍ" : "NO", method, path);
+        return requiresAdmin;
     }
 }

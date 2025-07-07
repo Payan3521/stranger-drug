@@ -12,6 +12,7 @@ import com.gateway.gateway.microserviceUsers.domain.exception.NoTokenException;
 import com.gateway.gateway.microserviceUsers.domain.model.UserContext;
 import com.gateway.gateway.microserviceUsers.domain.port.IEndpointSecurityService;
 import com.gateway.gateway.microserviceUsers.domain.port.IJwtValidationService;
+import com.gateway.gateway.common.logging.LoggingService;
 import reactor.core.publisher.Mono;
 
 @Slf4j
@@ -21,6 +22,7 @@ public class JwtGatewayFilter implements GlobalFilter, Ordered {
 
     private final IJwtValidationService jwtValidationService;
     private final IEndpointSecurityService endpointSecurityService;
+    private final LoggingService loggingService;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -28,28 +30,33 @@ public class JwtGatewayFilter implements GlobalFilter, Ordered {
         String method = exchange.getRequest().getMethod() != null ? 
             exchange.getRequest().getMethod().name() : "GET";
 
-        log.debug("JwtFilter: Procesando solicitud {} {}", method, path);
+        loggingService.logGatewayDebug("JwtGatewayFilter: Procesando solicitud {} {}", method, path);
 
         // Si es endpoint público, continuar sin validación JWT
         if (endpointSecurityService.isPublicEndpoint(path, method)) {
-            log.debug("JwtFilter: Endpoint público, omitiendo validación JWT");
+            loggingService.logGatewayDebug("JwtGatewayFilter: Endpoint público, omitiendo validación JWT");
             return chain.filter(exchange);
         }
 
         // Obtener header Authorization
         String authHeader = exchange.getRequest().getHeaders().getFirst("Authorization");
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            log.warn("JwtFilter: Token no proporcionado para {} {}", method, path);
+            loggingService.logSecurityWarning("JwtGatewayFilter: Token no proporcionado para {} {}", method, path);
             return Mono.error(new NoTokenException());
         }
 
         try {
             String jwt = authHeader.substring(7);
+            loggingService.logGatewayDebug("JwtGatewayFilter: Validando JWT para {} {} - Longitud del token: {}", method, path, jwt.length());
+            
             UserContext userContext = jwtValidationService.validateToken(jwt);
+
+            loggingService.logGatewayDebug("JwtGatewayFilter: JWT validado exitosamente - Usuario: {}, Rol: {}", userContext.getEmail(), userContext.getRole());
 
             // Verificar permisos para endpoints que requieren ADMIN
             if (endpointSecurityService.requiresAdminRole(path, method) && !userContext.isAdmin()) {
-                log.warn("JwtFilter: Acceso denegado - se requiere rol ADMIN para {} {}", method, path);
+                loggingService.logSecurityWarning("JwtGatewayFilter: Acceso denegado - se requiere rol ADMIN para {} {} - Usuario: {}, Rol: {}", 
+                    method, path, userContext.getEmail(), userContext.getRole());
                 return Mono.error(new NoAdminAccessException());
             }
 
@@ -62,11 +69,12 @@ public class JwtGatewayFilter implements GlobalFilter, Ordered {
                     .build())
                 .build();
 
-            log.debug("JwtFilter: Autenticación exitosa para usuario: {}", userContext.getEmail());
+            loggingService.logSecurity("JwtGatewayFilter: Autenticación exitosa para usuario: {} - Endpoint: {} {}", 
+                userContext.getEmail(), method, path);
             return chain.filter(modifiedExchange);
 
         } catch (Exception e) {
-            log.error("JwtFilter: Error durante validación JWT: {}", e.getMessage());
+            loggingService.logSecurityError("JwtGatewayFilter: Error durante validación JWT para {} {} - Error: {}", method, path, e.getMessage());
             return Mono.error(new NoTokenException());
         }
     }
