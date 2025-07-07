@@ -30,7 +30,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import com.microserviceone.users.core.logging.LoggingService;
-import com.microserviceone.users.core.rateLimiting.RateLimit;
 import com.microserviceone.users.registrationApi.application.service.UserValidationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -53,7 +52,6 @@ public class RegisterController {
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "409", description = "Conflicto: El cliente ya existe"),
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
-    @RateLimit(key = "register_customer", maxRequests = 10, description = "Registro de clientes - 10 solicitudes por minuto")
     @PostMapping("/customer")
     public ResponseEntity<ApiResponse<UserResponse>> registerCustomer(@Valid @RequestBody CustomerRequest customerRequest) {
         try {
@@ -100,7 +98,6 @@ public class RegisterController {
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "409", description = "Conflicto: El admin ya existe"),
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
-    @RateLimit(key = "register_admin", maxRequests = 10, description = "Registro de administradores - 10 solicitudes por minuto")
     @PostMapping("/admin")
     public ResponseEntity<ApiResponse<UserResponse>> registerAdmin(@Valid @RequestBody AdminRequest adminRequest){
         try {
@@ -147,7 +144,6 @@ public class RegisterController {
             content = @Content(schema = @Schema(implementation = UserResponse.class))),
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Usuario no encontrado")
     })
-    @RateLimit(key = "find_user", maxRequests = 50, description = "Búsqueda de usuarios - 50 solicitudes por minuto")
     @GetMapping("/id/{id}")
     public ResponseEntity<ApiResponse<UserResponse>> findUserById(
             @Parameter(description = "ID del usuario", required = true) @PathVariable Long id) {
@@ -182,7 +178,6 @@ public class RegisterController {
             content = @Content(schema = @Schema(implementation = UserResponse.class))),
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Usuario no encontrado")
     })
-    @RateLimit(key = "find_users_filters", maxRequests = 30, description = "Búsqueda de usuarios por filtros - 30 solicitudes por minuto")
     @GetMapping
     public ResponseEntity<ApiResponse<List<UserResponse>>> findUsersByFilters(
             @Parameter(description = "Nombre del usuario") @RequestParam(required = false) String name,
@@ -224,7 +219,6 @@ public class RegisterController {
             content = @Content(schema = @Schema(implementation = UserResponse.class))),
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Admin no encontrado")
     })
-    @RateLimit(key = "update_admin", maxRequests = 5, description = "Actualización de administrators - 20 solicitudes por minuto")
     @PutMapping("/admin/{id}")
     public ResponseEntity<ApiResponse<UserResponse>> updateAdmin(
             @Parameter(description = "ID del admin", required = true) @PathVariable Long id,
@@ -268,7 +262,6 @@ public class RegisterController {
             content = @Content(schema = @Schema(implementation = UserResponse.class))),
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Customer no encontrado")
     })
-    @RateLimit(key = "update_customer", maxRequests = 5, description = "Actualización de customers - 20 solicitudes por minuto")
     @PutMapping("/customer/{id}")
     public ResponseEntity<ApiResponse<UserResponse>> updateCustomer(
         @Parameter(description = "ID del customer", required = true) @PathVariable Long id,
@@ -312,7 +305,6 @@ public class RegisterController {
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "Usuario eliminado exitosamente"),
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Usuario no encontrado")
     })
-    @RateLimit(key = "delete_user", maxRequests = 4, description = "Eliminación de usuarios - 10 solicitudes por minuto")
     @DeleteMapping("/id/{id}")
     public ResponseEntity<ApiResponse<UserResponse>> deleteUser(
             @Parameter(description = "ID del usuario", required = true) @PathVariable Long id) {

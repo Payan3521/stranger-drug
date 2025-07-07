@@ -32,3 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 .env
+gateway/src/main/resources/application-local.properties

@@ -15,7 +15,6 @@ import com.microserviceone.users.termsAndConditionsApi.web.webMapper.TermWebMapp
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import com.microserviceone.users.core.rateLimiting.RateLimit;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +35,6 @@ public class TermController {
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "No se encontraron términos activos"),
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
-    @RateLimit(key = "terms_get_all_active", maxRequests = 20, description = "Obtener términos activos - 20 solicitudes por minuto")
     @GetMapping
     public ResponseEntity<ApiResponse<List<TermResponse>>> getAllActiveTerms() {
         List<TermResponse> terms = termsService.getAllActiveTerms().stream()
@@ -57,7 +55,6 @@ public class TermController {
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "No se encontró un término activo para el tipo especificado"),
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
-    @RateLimit(key = "terms_get_by_type", maxRequests = 20, description = "Obtener término por tipo - 20 solicitudes por minuto")
     @GetMapping("/type")
     public ResponseEntity<ApiResponse<TermResponse>> getActiveTermByType(@RequestParam(required = true) String type) {
         return termsService.getActiveTermByType(type)
@@ -73,7 +70,6 @@ public class TermController {
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Solicitud inválida: ID de término no proporcionado o usuario no encontrado"),
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
-    @RateLimit(key = "terms_accept_single", maxRequests = 5, description = "Aceptar término individual - 3 solicitudes por minuto")
     @PostMapping("/accept")
     public ResponseEntity<ApiResponse<Accepted>> acceptTerm(
             @Valid @RequestBody AcceptedRequest request,
@@ -92,7 +88,6 @@ public class TermController {
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Solicitud inválida: IDs de términos no proporcionados o usuario no encontrado"),
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
-    @RateLimit(key = "terms_accept_multiple", maxRequests = 5, description = "Aceptar múltiples términos - 3 solicitudes por minuto")
     @PostMapping("/accept/multiple")
     public ResponseEntity<ApiResponse<List<Accepted>>> acceptMultipleTerms(
             @Valid @RequestBody AcceptedMultipleRequest request,
@@ -112,7 +107,6 @@ public class TermController {
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "No se encontró el término o el usuario"),
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
-    @RateLimit(key = "terms_verify_acceptance", maxRequests = 5, description = "Verificar aceptación de término - 5 solicitudes por minuto")
     @GetMapping("/verify")
     public ResponseEntity<ApiResponse<Boolean>> verifyAcceptance(
             @RequestParam(required = true) Long userId,
@@ -129,7 +123,6 @@ public class TermController {
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "No se encontraron términos o el usuario no existe"),
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
-    @RateLimit(key = "terms_verify_by_email", maxRequests = 5, description = "Verificar todos los términos por email - 5 solicitudes por minuto")
     @GetMapping("/verify/email")
     public ResponseEntity<ApiResponse<Void>> verifyAllTermsByEmail(@RequestParam(required = true) String email) {
         termsService.verifyAllTermsAccepted(email);
@@ -143,7 +136,6 @@ public class TermController {
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "No se encontraron términos"),
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
-    @RateLimit(key = "terms_get_all", maxRequests = 20, description = "Obtener todos los términos - 20 solicitudes por minuto")
     @GetMapping("/all")
     public ResponseEntity<ApiResponse<List<TermResponse>>> getAllTerms() {
         List<TermResponse> terms = termsService.getAllTerms().stream()
@@ -163,7 +155,6 @@ public class TermController {
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "No se encontró el término con el ID especificado"),
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
-    @RateLimit(key = "terms_get_by_id", maxRequests = 20, description = "Obtener término por ID - 20 solicitudes por minuto")
     @GetMapping("/id/{id}")
     public ResponseEntity<TermResponse> getTermById(@PathVariable Long id) {
         return termsService.getById(id)

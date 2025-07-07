@@ -12,7 +12,6 @@ import com.microserviceone.users.verificationCodeApi.web.dto.VerifyCodeRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import com.microserviceone.users.core.rateLimiting.RateLimit;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -30,7 +29,6 @@ public class VerificationCodeController {
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Solicitud inválida: correo electrónico no proporcionado o formato incorrecto"),
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })     
-    @RateLimit(key = "verification_send_code", maxRequests = 1, description = "Enviar código de verificación - 1 solicitud cada 5 minutos")
     @PostMapping("/send")
     public ResponseEntity<ApiResponse<Void>> sendVerificationCode(@Valid @RequestBody SendCodeRequest request) {
         verificationService.sendCode(request.getEmail());
@@ -44,7 +42,6 @@ public class VerificationCodeController {
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Código inválido o expirado"),
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
-    @RateLimit(key = "verification_verify_code", maxRequests = 1, description = "Verificar código - 1 solicitud cada 5 minutos")
     @PostMapping("/check")
     public ResponseEntity<ApiResponse<Boolean>> verifyCode(@Valid @RequestBody VerifyCodeRequest request){
         boolean isValid = verificationService.verifyCode(request.getEmail(), request.getCode());
@@ -63,7 +60,6 @@ public class VerificationCodeController {
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Correo electronico no proporcionado o formato incorrecto"),
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor")
     })
-    @RateLimit(key = "verification_check_status", maxRequests = 5, description = "Verificar estado de email - 5 solicitudes por minuto")
     @PostMapping("/status")
     public ResponseEntity<ApiResponse<Void>> checkEmailVerification(@Valid @RequestBody SendCodeRequest request) {
         verificationService.checkEmailVerification(request.getEmail());

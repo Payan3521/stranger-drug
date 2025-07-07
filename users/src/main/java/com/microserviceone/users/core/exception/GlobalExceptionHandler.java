@@ -11,7 +11,6 @@ import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import com.microserviceone.users.core.rateLimiting.exception.TooManyRequestException;
 import com.microserviceone.users.registrationApi.application.exception.UserAlreadyRegisteredException;
 import com.microserviceone.users.registrationApi.application.exception.UserNotFoundException;
 import com.microserviceone.users.registrationApi.application.exception.UserPrerequisitesNotMetException;
@@ -25,18 +24,6 @@ import com.microserviceone.users.verificationCodeApi.application.exception.Email
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-
-    // ================== EXCEPCIONES DE RATE LIMITING ==================
-
-    @ExceptionHandler(TooManyRequestException.class)
-    public ResponseEntity<Map<String, Object>> handleTooManyRequestException(TooManyRequestException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.TOO_MANY_REQUESTS.value());
-        body.put("error", "Demasiadas solicitudes");
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.TOO_MANY_REQUESTS);
-    }
 
     // ================== EXCEPCIONES DE REGISTRO ==================
 
