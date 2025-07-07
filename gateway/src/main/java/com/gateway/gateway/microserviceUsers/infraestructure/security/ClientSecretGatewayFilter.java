@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import com.gateway.gateway.microserviceUsers.application.service.ClientSecretValidationService;
 import com.gateway.gateway.microserviceUsers.domain.exception.AccessErrorException;
+import com.gateway.gateway.common.logging.LoggingService;
 import reactor.core.publisher.Mono;
 
 @Slf4j
@@ -17,6 +18,7 @@ import reactor.core.publisher.Mono;
 public class ClientSecretGatewayFilter implements GlobalFilter, Ordered {
 
     private final ClientSecretValidationService clientSecretValidationService;
+    private final LoggingService loggingService;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -24,21 +26,21 @@ public class ClientSecretGatewayFilter implements GlobalFilter, Ordered {
         String method = exchange.getRequest().getMethod() != null ? 
             exchange.getRequest().getMethod().name() : "GET";
 
-        log.debug("ClientSecretFilter: Procesando solicitud {} {} - VALIDANDO CLIENT SECRET PARA TODOS LOS ENDPOINTS", method, path);
+        loggingService.logGatewayDebug("ClientSecretGatewayFilter: Procesando solicitud {} {} - VALIDANDO CLIENT SECRET PARA TODOS LOS ENDPOINTS", method, path);
 
         // Obtener el header del client secret
         String headerName = clientSecretValidationService.getSecretHeaderName();
         String clientSecret = exchange.getRequest().getHeaders().getFirst(headerName);
 
-        log.debug("ClientSecretFilter: Validando header {} para endpoint {} {}", headerName, method, path);
+        loggingService.logGatewayDebug("ClientSecretGatewayFilter: Validando header {} para endpoint {} {}", headerName, method, path);
 
         // VALIDAR CLIENT SECRET PARA TODOS LOS ENDPOINTS SIN EXCEPCIÓN
         if (!clientSecretValidationService.isValidClientSecret(clientSecret)) {
-            log.warn("ClientSecretFilter: Client secret inválido para {} {} - ACCESO DENEGADO", method, path);
+            loggingService.logSecurityWarning("ClientSecretGatewayFilter: Client secret inválido para {} {} - ACCESO DENEGADO", method, path);
             return Mono.error(new AccessErrorException());
         }
 
-        log.debug("ClientSecretFilter: Client secret válido para {} {}, continuando", method, path);
+        loggingService.logGatewayDebug("ClientSecretGatewayFilter: Client secret válido para {} {}, continuando", method, path);
         return chain.filter(exchange);
     }
 

@@ -7,16 +7,25 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import com.microserviceone.users.core.config.internalSecurity.InternalJwtFilter;
+import com.microserviceone.users.core.logging.LoggingService;
 
 @Configuration
 public class SecurityConfig {
 
+    private final LoggingService loggingService;
+
     @Autowired
     private InternalJwtFilter internalJwtFilter;
     
+    public SecurityConfig(LoggingService loggingService) {
+        this.loggingService = loggingService;
+    }
+    
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-         http
+        loggingService.logInfo("SecurityConfig: Iniciando configuración de seguridad del microservicio users");
+        
+        SecurityFilterChain filterChain = http
             .csrf().disable()
             .authorizeHttpRequests(auth -> auth
                 // QUITAR estas líneas que están en conflicto:
@@ -31,8 +40,11 @@ public class SecurityConfig {
                 .anyRequest().permitAll()
             )
             // Aplicar el filtro JWT antes del filtro de autenticación
-            .addFilterBefore(internalJwtFilter, UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(internalJwtFilter, UsernamePasswordAuthenticationFilter.class)
+            .build();
 
-        return http.build();
+        loggingService.logInfo("SecurityConfig: Configuración de seguridad completada - Todos los endpoints permitidos, filtro JWT interno configurado");
+        
+        return filterChain;
     } 
 }

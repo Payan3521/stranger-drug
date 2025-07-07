@@ -15,9 +15,12 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import com.microserviceone.users.core.logging.LoggingService;
 
 @Component
 public class InternalJwtFilter extends OncePerRequestFilter {
+
+    private final LoggingService loggingService;
 
     @Value("${internal-jwt.secret}")
     private String secret;
@@ -28,6 +31,10 @@ public class InternalJwtFilter extends OncePerRequestFilter {
         "/terms/accept/multiple"
     );
 
+    public InternalJwtFilter(LoggingService loggingService) {
+        this.loggingService = loggingService;
+    }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
@@ -36,30 +43,29 @@ public class InternalJwtFilter extends OncePerRequestFilter {
 
         String requestPath = request.getRequestURI();
         
-        // LOG PARA DEBUG
-        System.out.println("[JWT Filter] Processing request: " + requestPath);
+        loggingService.logDebug("InternalJwtFilter: Procesando solicitud: {}", requestPath);
         
         // Solo validar JWT en endpoints protegidos
         if (!requiresJwtValidation(requestPath)) {
-            System.out.println("[JWT Filter] Path not protected, continuing...");
+            loggingService.logDebug("InternalJwtFilter: Path no protegido, continuando sin validación JWT");
             filterChain.doFilter(request, response);
             return;
         }
 
-        System.out.println("[JWT Filter] Protected path detected, validating JWT...");
+        loggingService.logDebug("InternalJwtFilter: Path protegido detectado, validando JWT interno");
 
         String authHeader = request.getHeader("Authorization");
-        System.out.println("[JWT Filter] Authorization header: " + (authHeader != null ? "Present" : "Missing"));
+        loggingService.logDebug("InternalJwtFilter: Header Authorization: {}", authHeader != null ? "Presente" : "Ausente");
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            System.out.println("[JWT Filter] Missing or invalid Authorization header");
+            loggingService.logWarning("InternalJwtFilter: Header Authorization ausente o inválido");
             response.setContentType("application/json");
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         } 
 
         String token = authHeader.replace("Bearer ", "");
-        System.out.println("[JWT Filter] Token received: " + token.substring(0, Math.min(20, token.length())) + "...");
+        loggingService.logDebug("InternalJwtFilter: Token recibido: {}...", token.substring(0, Math.min(20, token.length())));
 
         try {
             Jws<Claims> claims = Jwts.parserBuilder()
@@ -69,31 +75,31 @@ public class InternalJwtFilter extends OncePerRequestFilter {
 
             // Validar issuer (corregido el nombre del servicio)
             String issuer = claims.getBody().getIssuer();
-            System.out.println("[JWT Filter] Token issuer: " + issuer);
+            loggingService.logDebug("InternalJwtFilter: Token issuer: {}", issuer);
             
             if (!"user-service".equals(issuer)) {
-                System.out.println("[JWT Filter] Invalid issuer: " + issuer);
+                loggingService.logWarning("InternalJwtFilter: Issuer inválido: {} - Esperado: user-service", issuer);
                 throw new JwtException("Issuer inválido: " + issuer);
             }
 
-            System.out.println("[JWT Filter] JWT validation successful");
+            loggingService.logInfo("InternalJwtFilter: Validación JWT interna exitosa - Issuer: {}", issuer);
 
         } catch (JwtException e) {
-            System.out.println("[JWT Filter] JWT validation failed: " + e.getMessage());
+            loggingService.logError("InternalJwtFilter: Validación JWT interna fallida: {}", e.getMessage());
             response.setContentType("application/json");
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, 
-                "{\"error\": \"Token inválido: " + e.getMessage());
+                "{\"error\": \"Token inválido: " + e.getMessage() + "\"}");
             return;
         }
 
-        System.out.println("[JWT Filter] Proceeding with request...");
+        loggingService.logDebug("InternalJwtFilter: Continuando con la solicitud");
         filterChain.doFilter(request, response);
     }
 
     private boolean requiresJwtValidation(String requestPath) {
         // CAMBIO CRÍTICO: usar equals() en lugar de startsWith()
         boolean requires = protectedPaths.stream().anyMatch(path -> requestPath.equals(path));
-        System.out.println("[JWT Filter] Path '" + requestPath + "' requires JWT: " + requires);
+        loggingService.logDebug("InternalJwtFilter: Path '{}' requiere JWT: {}", requestPath, requires);
         return requires;
     }
 }
