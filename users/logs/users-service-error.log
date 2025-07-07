@@ -9674,7 +9674,429 @@ com.netflix.discovery.shared.transport.TransportException: Cannot execute reques
 	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
 	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:114)
 	at java.base/java.lang.Thread.run(Thread.java:840)
+<<<<<<< HEAD
+2025-07-06 20:45:35 [restartedMain] ERROR com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Exception during pool initialization.
+java.sql.SQLInvalidAuthorizationSpecException: (conn=5) Access denied for user 'root'@'localhost' (using password: YES)
+	at org.mariadb.jdbc.export.ExceptionFactory.createException(ExceptionFactory.java:293)
+	at org.mariadb.jdbc.export.ExceptionFactory.create(ExceptionFactory.java:378)
+	at org.mariadb.jdbc.client.impl.ConnectionHelper.authenticationHandler(ConnectionHelper.java:279)
+	at org.mariadb.jdbc.client.impl.StandardClient.<init>(StandardClient.java:195)
+	at org.mariadb.jdbc.Driver.connect(Driver.java:69)
+	at org.mariadb.jdbc.Driver.connect(Driver.java:95)
+	at org.mariadb.jdbc.Driver.connect(Driver.java:26)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:428)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:61)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:276)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:107)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215)
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:45)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:223)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:191)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:170)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1432)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1503)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:388)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:364)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1231)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:949)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.microserviceone.users.UsersApplication.main(UsersApplication.java:25)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+2025-07-06 20:45:37 [restartedMain] ERROR com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Exception during pool initialization.
+java.sql.SQLInvalidAuthorizationSpecException: (conn=6) Access denied for user 'root'@'localhost' (using password: YES)
+	at org.mariadb.jdbc.export.ExceptionFactory.createException(ExceptionFactory.java:293)
+	at org.mariadb.jdbc.export.ExceptionFactory.create(ExceptionFactory.java:378)
+	at org.mariadb.jdbc.client.impl.ConnectionHelper.authenticationHandler(ConnectionHelper.java:279)
+	at org.mariadb.jdbc.client.impl.StandardClient.<init>(StandardClient.java:195)
+	at org.mariadb.jdbc.Driver.connect(Driver.java:69)
+	at org.mariadb.jdbc.Driver.connect(Driver.java:95)
+	at org.mariadb.jdbc.Driver.connect(Driver.java:26)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:428)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:46)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.getIsolatedConnection(GenerationTargetToDatabase.java:60)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.jdbcStatement(GenerationTargetToDatabase.java:112)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:79)
+	at org.hibernate.tool.schema.internal.Helper.applySqlString(Helper.java:233)
+	at org.hibernate.tool.schema.internal.Helper.applySqlStrings(Helper.java:217)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applyConstraintDropping(SchemaDropperImpl.java:470)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.dropConstraintsTablesSequences(SchemaDropperImpl.java:242)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.dropFromMetadata(SchemaDropperImpl.java:215)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.performDrop(SchemaDropperImpl.java:185)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:155)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:115)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:244)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:145)
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:142)
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37)
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:315)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:450)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1507)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:388)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:364)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1231)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:949)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.microserviceone.users.UsersApplication.main(UsersApplication.java:25)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+2025-07-06 20:45:37 [restartedMain] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=6) Access denied for user 'root'@'localhost' (using password: YES)
+2025-07-06 20:45:37 [restartedMain] ERROR o.s.o.j.LocalContainerEntityManagerFactoryBean - Failed to initialize JPA EntityManagerFactory: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution [(conn=6) Access denied for user 'root'@'localhost' (using password: YES)] [n/a]
+2025-07-06 20:45:38 [restartedMain] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution [(conn=6) Access denied for user 'root'@'localhost' (using password: YES)] [n/a]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1786)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1231)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:949)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.microserviceone.users.UsersApplication.main(UsersApplication.java:25)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: jakarta.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution [(conn=6) Access denied for user 'root'@'localhost' (using password: YES)] [n/a]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:421)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:364)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	... 21 common frames omitted
+Caused by: org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution [(conn=6) Access denied for user 'root'@'localhost' (using password: YES)] [n/a]
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:51)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:94)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:74)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.getIsolatedConnection(GenerationTargetToDatabase.java:60)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.jdbcStatement(GenerationTargetToDatabase.java:112)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:79)
+	at org.hibernate.tool.schema.internal.Helper.applySqlString(Helper.java:233)
+	at org.hibernate.tool.schema.internal.Helper.applySqlStrings(Helper.java:217)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applyConstraintDropping(SchemaDropperImpl.java:470)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.dropConstraintsTablesSequences(SchemaDropperImpl.java:242)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.dropFromMetadata(SchemaDropperImpl.java:215)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.performDrop(SchemaDropperImpl.java:185)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:155)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:115)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:244)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:145)
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:142)
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37)
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:315)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:450)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1507)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:388)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	... 25 common frames omitted
+Caused by: java.sql.SQLInvalidAuthorizationSpecException: (conn=6) Access denied for user 'root'@'localhost' (using password: YES)
+	at org.mariadb.jdbc.export.ExceptionFactory.createException(ExceptionFactory.java:293)
+	at org.mariadb.jdbc.export.ExceptionFactory.create(ExceptionFactory.java:378)
+	at org.mariadb.jdbc.client.impl.ConnectionHelper.authenticationHandler(ConnectionHelper.java:279)
+	at org.mariadb.jdbc.client.impl.StandardClient.<init>(StandardClient.java:195)
+	at org.mariadb.jdbc.Driver.connect(Driver.java:69)
+	at org.mariadb.jdbc.Driver.connect(Driver.java:95)
+	at org.mariadb.jdbc.Driver.connect(Driver.java:26)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:428)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:46)
+	... 48 common frames omitted
+2025-07-06 20:52:08 [restartedMain] ERROR com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Exception during pool initialization.
+java.sql.SQLInvalidAuthorizationSpecException: (conn=20) Access denied for user 'root'@'localhost' (using password: YES)
+	at org.mariadb.jdbc.export.ExceptionFactory.createException(ExceptionFactory.java:293)
+	at org.mariadb.jdbc.export.ExceptionFactory.create(ExceptionFactory.java:378)
+	at org.mariadb.jdbc.client.impl.ConnectionHelper.authenticationHandler(ConnectionHelper.java:279)
+	at org.mariadb.jdbc.client.impl.StandardClient.<init>(StandardClient.java:195)
+	at org.mariadb.jdbc.Driver.connect(Driver.java:69)
+	at org.mariadb.jdbc.Driver.connect(Driver.java:95)
+	at org.mariadb.jdbc.Driver.connect(Driver.java:26)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:428)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:61)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:276)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:107)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215)
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:45)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:223)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:191)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:170)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1432)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1503)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:388)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:364)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1231)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:949)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.microserviceone.users.UsersApplication.main(UsersApplication.java:25)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+2025-07-06 20:52:09 [restartedMain] ERROR com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Exception during pool initialization.
+java.sql.SQLInvalidAuthorizationSpecException: (conn=21) Access denied for user 'root'@'localhost' (using password: YES)
+	at org.mariadb.jdbc.export.ExceptionFactory.createException(ExceptionFactory.java:293)
+	at org.mariadb.jdbc.export.ExceptionFactory.create(ExceptionFactory.java:378)
+	at org.mariadb.jdbc.client.impl.ConnectionHelper.authenticationHandler(ConnectionHelper.java:279)
+	at org.mariadb.jdbc.client.impl.StandardClient.<init>(StandardClient.java:195)
+	at org.mariadb.jdbc.Driver.connect(Driver.java:69)
+	at org.mariadb.jdbc.Driver.connect(Driver.java:95)
+	at org.mariadb.jdbc.Driver.connect(Driver.java:26)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:428)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:46)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.getIsolatedConnection(GenerationTargetToDatabase.java:60)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.jdbcStatement(GenerationTargetToDatabase.java:112)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:79)
+	at org.hibernate.tool.schema.internal.Helper.applySqlString(Helper.java:233)
+	at org.hibernate.tool.schema.internal.Helper.applySqlStrings(Helper.java:217)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applyConstraintDropping(SchemaDropperImpl.java:470)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.dropConstraintsTablesSequences(SchemaDropperImpl.java:242)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.dropFromMetadata(SchemaDropperImpl.java:215)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.performDrop(SchemaDropperImpl.java:185)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:155)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:115)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:244)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:145)
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:142)
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37)
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:315)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:450)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1507)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:388)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:364)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1231)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:949)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.microserviceone.users.UsersApplication.main(UsersApplication.java:25)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+2025-07-06 20:52:09 [restartedMain] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=21) Access denied for user 'root'@'localhost' (using password: YES)
+2025-07-06 20:52:09 [restartedMain] ERROR o.s.o.j.LocalContainerEntityManagerFactoryBean - Failed to initialize JPA EntityManagerFactory: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution [(conn=21) Access denied for user 'root'@'localhost' (using password: YES)] [n/a]
+2025-07-06 20:52:10 [restartedMain] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution [(conn=21) Access denied for user 'root'@'localhost' (using password: YES)] [n/a]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1786)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1231)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:949)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.microserviceone.users.UsersApplication.main(UsersApplication.java:25)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: jakarta.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution [(conn=21) Access denied for user 'root'@'localhost' (using password: YES)] [n/a]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:421)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:364)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	... 21 common frames omitted
+Caused by: org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution [(conn=21) Access denied for user 'root'@'localhost' (using password: YES)] [n/a]
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:51)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:94)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:74)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.getIsolatedConnection(GenerationTargetToDatabase.java:60)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.jdbcStatement(GenerationTargetToDatabase.java:112)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:79)
+	at org.hibernate.tool.schema.internal.Helper.applySqlString(Helper.java:233)
+	at org.hibernate.tool.schema.internal.Helper.applySqlStrings(Helper.java:217)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applyConstraintDropping(SchemaDropperImpl.java:470)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.dropConstraintsTablesSequences(SchemaDropperImpl.java:242)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.dropFromMetadata(SchemaDropperImpl.java:215)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.performDrop(SchemaDropperImpl.java:185)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:155)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:115)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:244)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:145)
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:142)
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37)
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:315)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:450)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1507)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:388)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	... 25 common frames omitted
+Caused by: java.sql.SQLInvalidAuthorizationSpecException: (conn=21) Access denied for user 'root'@'localhost' (using password: YES)
+	at org.mariadb.jdbc.export.ExceptionFactory.createException(ExceptionFactory.java:293)
+	at org.mariadb.jdbc.export.ExceptionFactory.create(ExceptionFactory.java:378)
+	at org.mariadb.jdbc.client.impl.ConnectionHelper.authenticationHandler(ConnectionHelper.java:279)
+	at org.mariadb.jdbc.client.impl.StandardClient.<init>(StandardClient.java:195)
+	at org.mariadb.jdbc.Driver.connect(Driver.java:69)
+	at org.mariadb.jdbc.Driver.connect(Driver.java:95)
+	at org.mariadb.jdbc.Driver.connect(Driver.java:26)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:428)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:46)
+	... 48 common frames omitted
+2025-07-06 21:08:16 [http-nio-8082-exec-4] ERROR c.m.u.core.logging.LoggingService - CheckEmailVerificationUseCase: Excepción de email no verificado - Email: agudelo@gmail.com
+=======
 2025-07-06 20:10:12 [http-nio-8082-exec-3] ERROR c.m.u.core.logging.LoggingService - CheckEmailVerificationUseCase: Excepción de email no verificado - Email: agudelo1@gmail.com
+>>>>>>> develop
 com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVerifiedException: El correo electrónico aún no ha sido verificado
 	at com.microserviceone.users.verificationCodeApi.application.usecase.CheckEmailVerificationUseCase.checkEmailVerification(CheckEmailVerificationUseCase.java:30)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -9692,7 +10114,11 @@ com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVeri
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717)
 	at com.microserviceone.users.verificationCodeApi.application.usecase.CheckEmailVerificationUseCase$$SpringCGLIB$$0.checkEmailVerification(<generated>)
+<<<<<<< HEAD
+	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.lambda$checkEmailVerification$0(CachedCheckEmailVerificationUseCase.java:36)
+=======
 	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.lambda$0(CachedCheckEmailVerificationUseCase.java:36)
+>>>>>>> develop
 	at com.microserviceone.users.core.cache.service.CacheServiceImpl.getOrCompute(CacheServiceImpl.java:40)
 	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.checkEmailVerification(CachedCheckEmailVerificationUseCase.java:31)
 	at com.microserviceone.users.verificationCodeApi.application.service.VerificationService.checkEmailVerification(VerificationService.java:55)
@@ -9829,7 +10255,11 @@ com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVeri
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:840)
+<<<<<<< HEAD
+2025-07-06 21:08:16 [http-nio-8082-exec-4] ERROR c.m.u.core.logging.LoggingService - CacheService: Error en getOrCompute - Cache: emailVerified, Key: emailVerified:agudelo@gmail.com
+=======
 2025-07-06 20:10:12 [http-nio-8082-exec-3] ERROR c.m.u.core.logging.LoggingService - CacheService: Error en getOrCompute - Cache: emailVerified, Key: emailVerified:agudelo1@gmail.com
+>>>>>>> develop
 com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVerifiedException: El correo electrónico aún no ha sido verificado
 	at com.microserviceone.users.verificationCodeApi.application.usecase.CheckEmailVerificationUseCase.checkEmailVerification(CheckEmailVerificationUseCase.java:30)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -9847,7 +10277,11 @@ com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVeri
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717)
 	at com.microserviceone.users.verificationCodeApi.application.usecase.CheckEmailVerificationUseCase$$SpringCGLIB$$0.checkEmailVerification(<generated>)
+<<<<<<< HEAD
+	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.lambda$checkEmailVerification$0(CachedCheckEmailVerificationUseCase.java:36)
+=======
 	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.lambda$0(CachedCheckEmailVerificationUseCase.java:36)
+>>>>>>> develop
 	at com.microserviceone.users.core.cache.service.CacheServiceImpl.getOrCompute(CacheServiceImpl.java:40)
 	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.checkEmailVerification(CachedCheckEmailVerificationUseCase.java:31)
 	at com.microserviceone.users.verificationCodeApi.application.service.VerificationService.checkEmailVerification(VerificationService.java:55)
@@ -9984,7 +10418,11 @@ com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVeri
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:840)
+<<<<<<< HEAD
+2025-07-06 21:08:16 [http-nio-8082-exec-4] ERROR c.m.u.core.logging.LoggingService - CheckEmailVerificationUseCase: Excepción de email no verificado - Email: agudelo@gmail.com
+=======
 2025-07-06 20:10:12 [http-nio-8082-exec-3] ERROR c.m.u.core.logging.LoggingService - CheckEmailVerificationUseCase: Excepción de email no verificado - Email: agudelo1@gmail.com
+>>>>>>> develop
 com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVerifiedException: El correo electrónico aún no ha sido verificado
 	at com.microserviceone.users.verificationCodeApi.application.usecase.CheckEmailVerificationUseCase.checkEmailVerification(CheckEmailVerificationUseCase.java:30)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -10002,7 +10440,11 @@ com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVeri
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717)
 	at com.microserviceone.users.verificationCodeApi.application.usecase.CheckEmailVerificationUseCase$$SpringCGLIB$$0.checkEmailVerification(<generated>)
+<<<<<<< HEAD
+	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.lambda$checkEmailVerification$0(CachedCheckEmailVerificationUseCase.java:36)
+=======
 	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.lambda$0(CachedCheckEmailVerificationUseCase.java:36)
+>>>>>>> develop
 	at com.microserviceone.users.core.cache.service.CacheServiceImpl.getOrCompute(CacheServiceImpl.java:52)
 	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.checkEmailVerification(CachedCheckEmailVerificationUseCase.java:31)
 	at com.microserviceone.users.verificationCodeApi.application.service.VerificationService.checkEmailVerification(VerificationService.java:55)
@@ -10139,7 +10581,11 @@ com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVeri
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:840)
+<<<<<<< HEAD
+2025-07-06 21:08:16 [http-nio-8082-exec-4] ERROR c.m.u.core.logging.LoggingService - CachedCheckEmailVerificationUseCase: Error en verificación con cache - Email: agudelo@gmail.com
+=======
 2025-07-06 20:10:12 [http-nio-8082-exec-3] ERROR c.m.u.core.logging.LoggingService - CachedCheckEmailVerificationUseCase: Error en verificación con cache - Email: agudelo1@gmail.com
+>>>>>>> develop
 com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVerifiedException: El correo electrónico aún no ha sido verificado
 	at com.microserviceone.users.verificationCodeApi.application.usecase.CheckEmailVerificationUseCase.checkEmailVerification(CheckEmailVerificationUseCase.java:30)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -10157,7 +10603,11 @@ com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVeri
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717)
 	at com.microserviceone.users.verificationCodeApi.application.usecase.CheckEmailVerificationUseCase$$SpringCGLIB$$0.checkEmailVerification(<generated>)
+<<<<<<< HEAD
+	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.lambda$checkEmailVerification$0(CachedCheckEmailVerificationUseCase.java:36)
+=======
 	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.lambda$0(CachedCheckEmailVerificationUseCase.java:36)
+>>>>>>> develop
 	at com.microserviceone.users.core.cache.service.CacheServiceImpl.getOrCompute(CacheServiceImpl.java:52)
 	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.checkEmailVerification(CachedCheckEmailVerificationUseCase.java:31)
 	at com.microserviceone.users.verificationCodeApi.application.service.VerificationService.checkEmailVerification(VerificationService.java:55)
@@ -10294,7 +10744,11 @@ com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVeri
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:840)
+<<<<<<< HEAD
+2025-07-06 21:08:16 [http-nio-8082-exec-4] ERROR c.m.u.core.logging.LoggingService - CheckEmailVerificationUseCase: Excepción de email no verificado - Email: agudelo@gmail.com
+=======
 2025-07-06 20:10:12 [http-nio-8082-exec-3] ERROR c.m.u.core.logging.LoggingService - CheckEmailVerificationUseCase: Excepción de email no verificado - Email: agudelo1@gmail.com
+>>>>>>> develop
 com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVerifiedException: El correo electrónico aún no ha sido verificado
 	at com.microserviceone.users.verificationCodeApi.application.usecase.CheckEmailVerificationUseCase.checkEmailVerification(CheckEmailVerificationUseCase.java:30)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -10447,7 +10901,11 @@ com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVeri
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:840)
+<<<<<<< HEAD
+2025-07-06 21:08:16 [http-nio-8082-exec-4] ERROR c.m.u.core.logging.LoggingService - VerificationService: Error al verificar estado de email - Email: agudelo@gmail.com
+=======
 2025-07-06 20:10:12 [http-nio-8082-exec-3] ERROR c.m.u.core.logging.LoggingService - VerificationService: Error al verificar estado de email - Email: agudelo1@gmail.com
+>>>>>>> develop
 com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVerifiedException: El correo electrónico aún no ha sido verificado
 	at com.microserviceone.users.verificationCodeApi.application.usecase.CheckEmailVerificationUseCase.checkEmailVerification(CheckEmailVerificationUseCase.java:30)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -10600,9 +11058,15 @@ com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVeri
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:840)
+<<<<<<< HEAD
+2025-07-06 21:08:16 [http-nio-8082-exec-6] ERROR c.m.u.core.logging.LoggingService - Error HTTP al validar verificación de email: agudelo@gmail.com - Status: 400 BAD_REQUEST
+2025-07-06 21:08:16 [http-nio-8082-exec-6] ERROR c.m.u.core.logging.LoggingService - Error al registrar cliente con email: agudelo@gmail.com
+com.microserviceone.users.registrationApi.application.exception.UserPrerequisitesNotMetException: El email no ha sido verificado: 400 : "{"error":"Email no verificado","message":"El correo electrónico aún no ha sido verificado","timestamp":[2025,7,6,21,8,16,236884263],"status":400}"
+=======
 2025-07-06 20:10:12 [http-nio-8082-exec-2] ERROR c.m.u.core.logging.LoggingService - Error HTTP al validar verificación de email: agudelo1@gmail.com - Status: 400 BAD_REQUEST
 2025-07-06 20:10:12 [http-nio-8082-exec-2] ERROR c.m.u.core.logging.LoggingService - Error al registrar cliente con email: agudelo1@gmail.com
 com.microserviceone.users.registrationApi.application.exception.UserPrerequisitesNotMetException: El email no ha sido verificado: 400 : "{"error":"Email no verificado","message":"El correo electrónico aún no ha sido verificado","timestamp":[2025,7,6,20,10,12,401817196],"status":400}"
+>>>>>>> develop
 	at com.microserviceone.users.registrationApi.application.service.UserValidationService.validateEmailVerification(UserValidationService.java:120)
 	at com.microserviceone.users.registrationApi.application.service.UserValidationService.validateUserPrerequisites(UserValidationService.java:134)
 	at com.microserviceone.users.registrationApi.web.controller.RegisterController.registerCustomer(RegisterController.java:65)
@@ -10738,7 +11202,11 @@ com.microserviceone.users.registrationApi.application.exception.UserPrerequisite
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:840)
+<<<<<<< HEAD
+Caused by: org.springframework.web.client.HttpClientErrorException$BadRequest: 400 : "{"error":"Email no verificado","message":"El correo electrónico aún no ha sido verificado","timestamp":[2025,7,6,21,8,16,236884263],"status":400}"
+=======
 Caused by: org.springframework.web.client.HttpClientErrorException$BadRequest: 400 : "{"error":"Email no verificado","message":"El correo electrónico aún no ha sido verificado","timestamp":[2025,7,6,20,10,12,401817196],"status":400}"
+>>>>>>> develop
 	at org.springframework.web.client.HttpClientErrorException.create(HttpClientErrorException.java:103)
 	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:183)
 	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:137)
@@ -10749,6 +11217,9 @@ Caused by: org.springframework.web.client.HttpClientErrorException$BadRequest: 4
 	at org.springframework.web.client.RestTemplate.postForEntity(RestTemplate.java:538)
 	at com.microserviceone.users.registrationApi.application.service.UserValidationService.validateEmailVerification(UserValidationService.java:104)
 	... 134 common frames omitted
+<<<<<<< HEAD
+2025-07-06 21:11:45 [http-nio-8082-exec-3] ERROR c.m.u.core.logging.LoggingService - CheckEmailVerificationUseCase: Excepción de email no verificado - Email: agudelo@gmail.com
+=======
 2025-07-06 20:10:17 [http-nio-8082-exec-5] ERROR c.m.u.core.logging.LoggingService - Usuario no encontrado con ID: 1
 2025-07-06 20:10:17 [http-nio-8082-exec-5] ERROR c.m.u.core.logging.LoggingService - RegistrationService: Error al buscar usuario por ID: 1
 com.microserviceone.users.registrationApi.application.exception.UserNotFoundException: Usuario no encontrado con ID: 1
@@ -11027,6 +11498,7 @@ com.microserviceone.users.registrationApi.application.exception.UserNotFoundExce
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:840)
 2025-07-06 20:10:48 [http-nio-8082-exec-7] ERROR c.m.u.core.logging.LoggingService - CheckEmailVerificationUseCase: Excepción de email no verificado - Email: agudelo1@gmail.com
+>>>>>>> develop
 com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVerifiedException: El correo electrónico aún no ha sido verificado
 	at com.microserviceone.users.verificationCodeApi.application.usecase.CheckEmailVerificationUseCase.checkEmailVerification(CheckEmailVerificationUseCase.java:30)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -11044,7 +11516,11 @@ com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVeri
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717)
 	at com.microserviceone.users.verificationCodeApi.application.usecase.CheckEmailVerificationUseCase$$SpringCGLIB$$0.checkEmailVerification(<generated>)
+<<<<<<< HEAD
+	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.lambda$checkEmailVerification$0(CachedCheckEmailVerificationUseCase.java:36)
+=======
 	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.lambda$0(CachedCheckEmailVerificationUseCase.java:36)
+>>>>>>> develop
 	at com.microserviceone.users.core.cache.service.CacheServiceImpl.getOrCompute(CacheServiceImpl.java:40)
 	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.checkEmailVerification(CachedCheckEmailVerificationUseCase.java:31)
 	at com.microserviceone.users.verificationCodeApi.application.service.VerificationService.checkEmailVerification(VerificationService.java:55)
@@ -11181,7 +11657,11 @@ com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVeri
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:840)
+<<<<<<< HEAD
+2025-07-06 21:11:45 [http-nio-8082-exec-3] ERROR c.m.u.core.logging.LoggingService - CacheService: Error en getOrCompute - Cache: emailVerified, Key: emailVerified:agudelo@gmail.com
+=======
 2025-07-06 20:10:48 [http-nio-8082-exec-7] ERROR c.m.u.core.logging.LoggingService - CacheService: Error en getOrCompute - Cache: emailVerified, Key: emailVerified:agudelo1@gmail.com
+>>>>>>> develop
 com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVerifiedException: El correo electrónico aún no ha sido verificado
 	at com.microserviceone.users.verificationCodeApi.application.usecase.CheckEmailVerificationUseCase.checkEmailVerification(CheckEmailVerificationUseCase.java:30)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -11199,7 +11679,11 @@ com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVeri
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717)
 	at com.microserviceone.users.verificationCodeApi.application.usecase.CheckEmailVerificationUseCase$$SpringCGLIB$$0.checkEmailVerification(<generated>)
+<<<<<<< HEAD
+	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.lambda$checkEmailVerification$0(CachedCheckEmailVerificationUseCase.java:36)
+=======
 	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.lambda$0(CachedCheckEmailVerificationUseCase.java:36)
+>>>>>>> develop
 	at com.microserviceone.users.core.cache.service.CacheServiceImpl.getOrCompute(CacheServiceImpl.java:40)
 	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.checkEmailVerification(CachedCheckEmailVerificationUseCase.java:31)
 	at com.microserviceone.users.verificationCodeApi.application.service.VerificationService.checkEmailVerification(VerificationService.java:55)
@@ -11336,7 +11820,11 @@ com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVeri
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:840)
+<<<<<<< HEAD
+2025-07-06 21:11:45 [http-nio-8082-exec-3] ERROR c.m.u.core.logging.LoggingService - CheckEmailVerificationUseCase: Excepción de email no verificado - Email: agudelo@gmail.com
+=======
 2025-07-06 20:10:48 [http-nio-8082-exec-7] ERROR c.m.u.core.logging.LoggingService - CheckEmailVerificationUseCase: Excepción de email no verificado - Email: agudelo1@gmail.com
+>>>>>>> develop
 com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVerifiedException: El correo electrónico aún no ha sido verificado
 	at com.microserviceone.users.verificationCodeApi.application.usecase.CheckEmailVerificationUseCase.checkEmailVerification(CheckEmailVerificationUseCase.java:30)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -11354,7 +11842,11 @@ com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVeri
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717)
 	at com.microserviceone.users.verificationCodeApi.application.usecase.CheckEmailVerificationUseCase$$SpringCGLIB$$0.checkEmailVerification(<generated>)
+<<<<<<< HEAD
+	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.lambda$checkEmailVerification$0(CachedCheckEmailVerificationUseCase.java:36)
+=======
 	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.lambda$0(CachedCheckEmailVerificationUseCase.java:36)
+>>>>>>> develop
 	at com.microserviceone.users.core.cache.service.CacheServiceImpl.getOrCompute(CacheServiceImpl.java:52)
 	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.checkEmailVerification(CachedCheckEmailVerificationUseCase.java:31)
 	at com.microserviceone.users.verificationCodeApi.application.service.VerificationService.checkEmailVerification(VerificationService.java:55)
@@ -11491,7 +11983,11 @@ com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVeri
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:840)
+<<<<<<< HEAD
+2025-07-06 21:11:45 [http-nio-8082-exec-3] ERROR c.m.u.core.logging.LoggingService - CachedCheckEmailVerificationUseCase: Error en verificación con cache - Email: agudelo@gmail.com
+=======
 2025-07-06 20:10:48 [http-nio-8082-exec-7] ERROR c.m.u.core.logging.LoggingService - CachedCheckEmailVerificationUseCase: Error en verificación con cache - Email: agudelo1@gmail.com
+>>>>>>> develop
 com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVerifiedException: El correo electrónico aún no ha sido verificado
 	at com.microserviceone.users.verificationCodeApi.application.usecase.CheckEmailVerificationUseCase.checkEmailVerification(CheckEmailVerificationUseCase.java:30)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -11509,7 +12005,11 @@ com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVeri
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717)
 	at com.microserviceone.users.verificationCodeApi.application.usecase.CheckEmailVerificationUseCase$$SpringCGLIB$$0.checkEmailVerification(<generated>)
+<<<<<<< HEAD
+	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.lambda$checkEmailVerification$0(CachedCheckEmailVerificationUseCase.java:36)
+=======
 	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.lambda$0(CachedCheckEmailVerificationUseCase.java:36)
+>>>>>>> develop
 	at com.microserviceone.users.core.cache.service.CacheServiceImpl.getOrCompute(CacheServiceImpl.java:52)
 	at com.microserviceone.users.verificationCodeApi.application.usecase.cached.CachedCheckEmailVerificationUseCase.checkEmailVerification(CachedCheckEmailVerificationUseCase.java:31)
 	at com.microserviceone.users.verificationCodeApi.application.service.VerificationService.checkEmailVerification(VerificationService.java:55)
@@ -11646,7 +12146,11 @@ com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVeri
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:840)
+<<<<<<< HEAD
+2025-07-06 21:11:45 [http-nio-8082-exec-3] ERROR c.m.u.core.logging.LoggingService - CheckEmailVerificationUseCase: Excepción de email no verificado - Email: agudelo@gmail.com
+=======
 2025-07-06 20:10:48 [http-nio-8082-exec-7] ERROR c.m.u.core.logging.LoggingService - CheckEmailVerificationUseCase: Excepción de email no verificado - Email: agudelo1@gmail.com
+>>>>>>> develop
 com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVerifiedException: El correo electrónico aún no ha sido verificado
 	at com.microserviceone.users.verificationCodeApi.application.usecase.CheckEmailVerificationUseCase.checkEmailVerification(CheckEmailVerificationUseCase.java:30)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -11799,7 +12303,11 @@ com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVeri
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:840)
+<<<<<<< HEAD
+2025-07-06 21:11:45 [http-nio-8082-exec-3] ERROR c.m.u.core.logging.LoggingService - VerificationService: Error al verificar estado de email - Email: agudelo@gmail.com
+=======
 2025-07-06 20:10:48 [http-nio-8082-exec-7] ERROR c.m.u.core.logging.LoggingService - VerificationService: Error al verificar estado de email - Email: agudelo1@gmail.com
+>>>>>>> develop
 com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVerifiedException: El correo electrónico aún no ha sido verificado
 	at com.microserviceone.users.verificationCodeApi.application.usecase.CheckEmailVerificationUseCase.checkEmailVerification(CheckEmailVerificationUseCase.java:30)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -11952,9 +12460,15 @@ com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVeri
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:840)
+<<<<<<< HEAD
+2025-07-06 21:11:45 [http-nio-8082-exec-1] ERROR c.m.u.core.logging.LoggingService - Error HTTP al validar verificación de email: agudelo@gmail.com - Status: 400 BAD_REQUEST
+2025-07-06 21:11:45 [http-nio-8082-exec-1] ERROR c.m.u.core.logging.LoggingService - Error al registrar cliente con email: agudelo@gmail.com
+com.microserviceone.users.registrationApi.application.exception.UserPrerequisitesNotMetException: El email no ha sido verificado: 400 : "{"error":"Email no verificado","message":"El correo electrónico aún no ha sido verificado","timestamp":[2025,7,6,21,11,45,130624088],"status":400}"
+=======
 2025-07-06 20:10:48 [http-nio-8082-exec-6] ERROR c.m.u.core.logging.LoggingService - Error HTTP al validar verificación de email: agudelo1@gmail.com - Status: 400 BAD_REQUEST
 2025-07-06 20:10:48 [http-nio-8082-exec-6] ERROR c.m.u.core.logging.LoggingService - Error al registrar cliente con email: agudelo1@gmail.com
 com.microserviceone.users.registrationApi.application.exception.UserPrerequisitesNotMetException: El email no ha sido verificado: 400 : "{"error":"Email no verificado","message":"El correo electrónico aún no ha sido verificado","timestamp":[2025,7,6,20,10,48,356384883],"status":400}"
+>>>>>>> develop
 	at com.microserviceone.users.registrationApi.application.service.UserValidationService.validateEmailVerification(UserValidationService.java:120)
 	at com.microserviceone.users.registrationApi.application.service.UserValidationService.validateUserPrerequisites(UserValidationService.java:134)
 	at com.microserviceone.users.registrationApi.web.controller.RegisterController.registerCustomer(RegisterController.java:65)
@@ -12090,7 +12604,11 @@ com.microserviceone.users.registrationApi.application.exception.UserPrerequisite
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:840)
+<<<<<<< HEAD
+Caused by: org.springframework.web.client.HttpClientErrorException$BadRequest: 400 : "{"error":"Email no verificado","message":"El correo electrónico aún no ha sido verificado","timestamp":[2025,7,6,21,11,45,130624088],"status":400}"
+=======
 Caused by: org.springframework.web.client.HttpClientErrorException$BadRequest: 400 : "{"error":"Email no verificado","message":"El correo electrónico aún no ha sido verificado","timestamp":[2025,7,6,20,10,48,356384883],"status":400}"
+>>>>>>> develop
 	at org.springframework.web.client.HttpClientErrorException.create(HttpClientErrorException.java:103)
 	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:183)
 	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:137)
@@ -12101,6 +12619,9 @@ Caused by: org.springframework.web.client.HttpClientErrorException$BadRequest: 4
 	at org.springframework.web.client.RestTemplate.postForEntity(RestTemplate.java:538)
 	at com.microserviceone.users.registrationApi.application.service.UserValidationService.validateEmailVerification(UserValidationService.java:104)
 	... 134 common frames omitted
+<<<<<<< HEAD
+2025-07-06 21:12:27 [http-nio-8082-exec-4] ERROR c.m.u.core.logging.LoggingService - AcceptTermUseCase: Error al aceptar término - UserID: 1, Email: sebasagudelo1012@gmail.com, TermID: 1
+=======
 2025-07-06 20:11:16 [http-nio-8082-exec-8] ERROR c.m.u.core.logging.LoggingService - Usuario no encontrado con ID: 1
 2025-07-06 20:11:16 [http-nio-8082-exec-8] ERROR c.m.u.core.logging.LoggingService - RegistrationService: Error al buscar usuario por ID: 1
 com.microserviceone.users.registrationApi.application.exception.UserNotFoundException: Usuario no encontrado con ID: 1
@@ -15591,6 +16112,7 @@ Caused by: org.springframework.web.client.HttpClientErrorException$BadRequest: 4
 	at com.microserviceone.users.registrationApi.application.service.UserValidationService.validateEmailVerification(UserValidationService.java:104)
 	... 134 common frames omitted
 2025-07-06 23:14:00 [http-nio-8082-exec-1] ERROR c.m.u.core.logging.LoggingService - AcceptTermUseCase: Error al aceptar término - UserID: 1, Email: pablobedoya3521@gmail.com, TermID: 1
+>>>>>>> develop
 com.microserviceone.users.termsAndConditionsApi.application.exception.TermNotActiveOrNotFoundException: Term not found or not active
 	at com.microserviceone.users.termsAndConditionsApi.application.usecase.ValidateExistTermUseCase.lambda$validateTerm$1(ValidateExistTermUseCase.java:23)
 	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
@@ -15628,7 +16150,11 @@ com.microserviceone.users.termsAndConditionsApi.application.exception.TermNotAct
 	at com.microserviceone.users.termsAndConditionsApi.application.usecase.AcceptTermUseCase$$SpringCGLIB$$0.acceptTerm(<generated>)
 	at com.microserviceone.users.termsAndConditionsApi.application.usecase.AcceptAllTermsUseCase.acceptAll(AcceptAllTermsUseCase.java:29)
 	at com.microserviceone.users.termsAndConditionsApi.application.service.TermsService.acceptAll(TermsService.java:169)
+<<<<<<< HEAD
+	at com.microserviceone.users.termsAndConditionsApi.web.controller.TermController.acceptMultipleTerms(TermController.java:102)
+=======
 	at com.microserviceone.users.termsAndConditionsApi.web.controller.TermController.acceptMultipleTerms(TermController.java:97)
+>>>>>>> develop
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -15761,6 +16287,8 @@ com.microserviceone.users.termsAndConditionsApi.application.exception.TermNotAct
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:840)
+<<<<<<< HEAD
+=======
 2025-07-06 23:14:04 [http-nio-8082-exec-3] ERROR c.m.u.core.logging.LoggingService - Excepción de email duplicado: pablobedoya3521@gmail.com
 com.microserviceone.users.registrationApi.application.exception.UserAlreadyRegisteredException: El usuario con email pablobedoya3521@gmail.com ya está registrado
 	at com.microserviceone.users.registrationApi.application.usecase.ValidateUniqueEmailUseCase.validate(ValidateUniqueEmailUseCase.java:27)
@@ -23358,3 +23886,4 @@ com.netflix.discovery.shared.transport.TransportException: Cannot execute reques
 	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
 	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:114)
 	at java.base/java.lang.Thread.run(Thread.java:840)
+>>>>>>> develop
