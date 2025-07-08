@@ -25,5 +25,5 @@ public class DeleteUseCase implements IDelete{
         loggingService.logDebug("Usuario eliminado exitosamente - ID: {}, Email: {}", id, user.getEmail());
         return Optional.of(user);
     }
-    
+     
 }
