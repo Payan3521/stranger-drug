@@ -97,8 +97,8 @@ public abstract class User {
     }
 
     private void validatePassword(String password) {
-        if (password == null || password.length() < 6) {
-            throw new IllegalArgumentException("Password must be at least 6 characters long");
+        if (password == null || password.length() < 8) {
+            throw new IllegalArgumentException("Password must be at least 8 characters long");
         }
         // In production, add more sophisticated password validation
     }

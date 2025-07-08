@@ -4,6 +4,7 @@ import com.microserviceone.users.registrationApi.domain.model.Admin;
 import com.microserviceone.users.registrationApi.domain.model.Customer;
 import com.microserviceone.users.registrationApi.domain.model.User;
 import com.microserviceone.users.registrationApi.domain.port.in.IDelete;
+import com.microserviceone.users.registrationApi.domain.port.in.IFindByEmail;
 import com.microserviceone.users.registrationApi.domain.port.in.IFindByFilters;
 import com.microserviceone.users.registrationApi.domain.port.in.IFindById;
 import com.microserviceone.users.registrationApi.domain.port.in.ISaveAdmin;
@@ -15,7 +16,7 @@ import com.microserviceone.users.core.logging.LoggingService;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class RegistrationService implements ISaveAdmin, ISaveCustomer, IDelete, IUpdate, IFindByFilters, IFindById{
+public class RegistrationService implements ISaveAdmin, ISaveCustomer, IDelete, IUpdate, IFindByFilters, IFindById, IFindByEmail{
 
     private final ISaveAdmin saveAdmin;
     private final ISaveCustomer saveCustomer;
@@ -23,6 +24,7 @@ public class RegistrationService implements ISaveAdmin, ISaveCustomer, IDelete, 
     private final IFindByFilters findByFiltersUseCase;
     private final IUpdate updateUseCase;
     private final IDelete deleteUseCase;
+    private final IFindByEmail findByEmailUseCase;
     private final LoggingService loggingService;
 
     @Override
@@ -130,6 +132,24 @@ public class RegistrationService implements ISaveAdmin, ISaveCustomer, IDelete, 
             
         } catch (Exception e) {
             loggingService.logError("RegistrationService: Error al eliminar usuario - ID: {}", id, e);
+            throw e;
+        }
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        try {
+            loggingService.logInfo("RegistrationService: Iniciando búsqueda por email - Email: {}", email);
+            
+            Optional<User> user = findByEmailUseCase.findByEmail(email);
+            
+            loggingService.logInfo("RegistrationService: Búsqueda por email completada. Se encontró {} usuario", 
+                user.isPresent() ? "1" : "0");
+            
+            return user;
+            
+        } catch (Exception e) {
+            loggingService.logError("RegistrationService: Error al buscar usuario por email - Email: {}", email, e);
             throw e;
         }
     }

@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Primary;
 import com.microserviceone.users.core.logging.LoggingService;
 import com.microserviceone.users.registrationApi.application.service.RegistrationService;
 import com.microserviceone.users.registrationApi.domain.port.in.IDelete;
+import com.microserviceone.users.registrationApi.domain.port.in.IFindByEmail;
 import com.microserviceone.users.registrationApi.domain.port.in.IFindByFilters;
 import com.microserviceone.users.registrationApi.domain.port.in.IFindById;
 import com.microserviceone.users.registrationApi.domain.port.in.ISaveAdmin;
@@ -24,7 +25,7 @@ public class AppConfigRegister {
     }
 
     @Bean
-    public RegistrationService registrationService(ISaveAdmin saveAdmin, ISaveCustomer saveCustomer, IFindById findById, IFindByFilters findByFilters, IDelete delete, IUpdate update, LoggingService loggingService){
-        return new RegistrationService(saveAdmin, saveCustomer, findById, findByFilters, update, delete, loggingService);
+    public RegistrationService registrationService(ISaveAdmin saveAdmin, ISaveCustomer saveCustomer, IFindById findById, IFindByFilters findByFilters, IDelete delete, IUpdate update, LoggingService loggingService, IFindByEmail findByEmail){
+        return new RegistrationService(saveAdmin, saveCustomer, findById, findByFilters, update, delete, findByEmail, loggingService);
     }
 }

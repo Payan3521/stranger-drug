@@ -332,4 +332,38 @@ public class RegisterController {
             throw e;
         }
     }
+
+    @Operation(summary = "Buscar usuario por email", description = "Busca un usuario por su email")
+    @ApiResponses(value = {
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Usuario encontrado exitosamente",
+            content = @Content(schema = @Schema(implementation = UserResponse.class))),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Usuario no encontrado")
+    })
+    @GetMapping("/email")
+    public ResponseEntity<ApiResponse<UserResponse>> findUserByEmail(
+            @Parameter(description = "Email del usuario", required = true) @RequestParam String email) {
+        try {
+            loggingService.logInfo("Iniciando búsqueda de usuario por email - Email: {}", email);
+            
+            Optional<User> userOptional = registrationService.findByEmail(email);
+            
+            if (userOptional.isEmpty()) {
+                loggingService.logWarning("Usuario no encontrado para buscar con email: {}", email);
+                throw new UserNotFoundException(email);
+            }
+            
+            User user = userOptional.get();
+            loggingService.logDebug("Mapeando respuesta para usuario encontrado ID: {}", user.getId());
+            UserResponse userResponse = registrationWebMapper.toResponse(user);
+
+            loggingService.logInfo("Usuario encontrado exitosamente - ID: {}, Email: {}", 
+                userResponse.getId(), userResponse.getEmail());
+
+            return ResponseEntity.ok(ApiResponse.success("User found successfully", userResponse));
+                
+        } catch (Exception e) {
+            loggingService.logError("Error al buscar usuario por email - Email: {}", email, e);
+            throw e;
+        }
+    }
 }
