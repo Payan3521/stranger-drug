@@ -2,7 +2,6 @@ package com.gateway.gateway.microserviceUsers.rateLimiting.infraestructure.confi
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -33,6 +32,7 @@ public class RateLimitProperties {
         endpointLimits.put("update_customer", 5);
         endpointLimits.put("update_admin", 5);
         endpointLimits.put("delete_user", 4);
+        endpointLimits.put("find_by_email", 15);
         
         // TermController - Rate limits
         endpointLimits.put("terms_get_all_active", 20);

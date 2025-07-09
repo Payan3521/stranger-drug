@@ -8,12 +8,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import com.gateway.gateway.common.logging.LoggingService;
 import com.gateway.gateway.microserviceUsers.jwt.domain.exception.InvalidTokenException;
 import com.gateway.gateway.microserviceUsers.jwt.domain.model.UserContext;
 import com.gateway.gateway.microserviceUsers.jwt.domain.port.IJwtValidationService;
-
 import java.nio.charset.StandardCharsets;
 
 @Slf4j

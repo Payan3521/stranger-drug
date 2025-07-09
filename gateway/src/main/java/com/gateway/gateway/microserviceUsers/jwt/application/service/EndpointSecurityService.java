@@ -2,11 +2,9 @@ package com.gateway.gateway.microserviceUsers.jwt.application.service;
 
 import java.util.Arrays;
 import java.util.List;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
 import com.gateway.gateway.common.logging.LoggingService;
 import com.gateway.gateway.microserviceUsers.jwt.domain.port.IEndpointSecurityService;
 

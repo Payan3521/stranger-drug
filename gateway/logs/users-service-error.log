@@ -1,102 +1,20 @@
-2025-07-06 20:10:37 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-06 20:10:37.603] [SECURITY-ERROR] AccessErrorException: {}
-2025-07-06 20:11:02 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-06 20:11:02.376] [SECURITY-ERROR] AccessErrorException: {}
-2025-07-06 20:11:08 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-06 20:11:08.466] [SECURITY-ERROR] NoTokenException: Debes ingresar un token de acceso
-2025-07-06 20:11:41 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-06 20:11:41.163] [SECURITY-ERROR] AccessErrorException: {}
-2025-07-06 20:11:47 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-06 20:11:47.296] [SECURITY-ERROR] NoTokenException: Debes ingresar un token de acceso
-2025-07-06 20:14:02 [DiscoveryClient-HeartbeatExecutor-0] ERROR c.netflix.discovery.DiscoveryClient - DiscoveryClient_GATEWAY-SERVICE/192.168.154.216:gateway-service:8080 - was unable to send heartbeat!
-com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92)
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89)
-	at com.netflix.discovery.DiscoveryClient.renew(DiscoveryClient.java:837)
-	at com.netflix.discovery.DiscoveryClient$HeartbeatThread.run(DiscoveryClient.java:1401)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:840)
-2025-07-06 20:14:03 [SpringApplicationShutdownHook] ERROR c.netflix.discovery.DiscoveryClient - DiscoveryClient_GATEWAY-SERVICE/192.168.154.216:gateway-service:8080 - de-registration failedCannot execute request on any known server
-com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
-	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:916)
-	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:892)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457)
-	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:415)
-	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:239)
-	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:202)
-	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:195)
-	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:389)
-	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:136)
-	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:211)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:798)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:748)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1474)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:707)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1467)
-	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1219)
-	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1180)
-	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.doClose(ReactiveWebServerApplicationContext.java:155)
-	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1126)
-	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:147)
-	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
-	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:116)
-	at java.base/java.lang.Thread.run(Thread.java:840)
-2025-07-06 23:17:26 [reactor-http-epoll-4] ERROR c.g.g.common.logging.LoggingService - [2025-07-06 23:17:26.765] [SECURITY-ERROR] AccessErrorException: {}
-2025-07-06 23:17:31 [reactor-http-epoll-4] ERROR c.g.g.common.logging.LoggingService - [2025-07-06 23:17:31.361] [SECURITY-ERROR] AccessErrorException: {}
-2025-07-06 23:17:33 [reactor-http-epoll-4] ERROR c.g.g.common.logging.LoggingService - [2025-07-06 23:17:33.270] [SECURITY-ERROR] AccessErrorException: {}
-2025-07-06 23:17:34 [reactor-http-epoll-4] ERROR c.g.g.common.logging.LoggingService - [2025-07-06 23:17:34.844] [SECURITY-ERROR] AccessErrorException: {}
-2025-07-06 23:17:36 [reactor-http-epoll-4] ERROR c.g.g.common.logging.LoggingService - [2025-07-06 23:17:36.457] [SECURITY-ERROR] AccessErrorException: {}
-2025-07-06 23:17:37 [reactor-http-epoll-4] ERROR c.g.g.common.logging.LoggingService - [2025-07-06 23:17:37.966] [SECURITY-ERROR] AccessErrorException: {}
-2025-07-06 23:17:39 [reactor-http-epoll-4] ERROR c.g.g.common.logging.LoggingService - [2025-07-06 23:17:39.459] [SECURITY-ERROR] AccessErrorException: {}
-2025-07-06 23:17:41 [reactor-http-epoll-4] ERROR c.g.g.common.logging.LoggingService - [2025-07-06 23:17:41.015] [SECURITY-ERROR] AccessErrorException: {}
-2025-07-06 23:18:28 [reactor-http-epoll-4] ERROR c.g.g.common.logging.LoggingService - [2025-07-06 23:18:28.283] [SECURITY-ERROR] AccessErrorException: {}
-2025-07-06 23:18:30 [reactor-http-epoll-4] ERROR c.g.g.common.logging.LoggingService - [2025-07-06 23:18:30.361] [SECURITY-ERROR] AccessErrorException: {}
-2025-07-06 23:18:31 [reactor-http-epoll-4] ERROR c.g.g.common.logging.LoggingService - [2025-07-06 23:18:31.860] [SECURITY-ERROR] AccessErrorException: {}
-2025-07-06 23:18:33 [reactor-http-epoll-4] ERROR c.g.g.common.logging.LoggingService - [2025-07-06 23:18:33.518] [SECURITY-ERROR] AccessErrorException: {}
-2025-07-06 23:18:35 [reactor-http-epoll-4] ERROR c.g.g.common.logging.LoggingService - [2025-07-06 23:18:35.167] [SECURITY-ERROR] AccessErrorException: {}
-2025-07-06 23:18:41 [reactor-http-epoll-4] ERROR c.g.g.common.logging.LoggingService - [2025-07-06 23:18:41.715] [SECURITY-ERROR] AccessErrorException: {}
-2025-07-06 23:18:43 [reactor-http-epoll-4] ERROR c.g.g.common.logging.LoggingService - [2025-07-06 23:18:43.148] [SECURITY-ERROR] AccessErrorException: {}
-2025-07-06 23:20:36 [SpringApplicationShutdownHook] ERROR c.netflix.discovery.DiscoveryClient - DiscoveryClient_GATEWAY-SERVICE/192.168.154.216:gateway-service:8080 - de-registration failedCannot execute request on any known server
-com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
-	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:916)
-	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:892)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457)
-	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:415)
-	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:239)
-	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:202)
-	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:195)
-	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:389)
-	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:136)
-	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:211)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:798)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:748)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1474)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:707)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1467)
-	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1219)
-	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1180)
-	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.doClose(ReactiveWebServerApplicationContext.java:155)
-	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1126)
-	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:147)
-	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
-	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:116)
-	at java.base/java.lang.Thread.run(Thread.java:840)
+2025-07-09 15:41:37 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-09 15:41:37.832] [SECURITY-ERROR] AccessErrorException: {}
+2025-07-09 15:41:46 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-09 15:41:46.634] [SECURITY-ERROR] AccessErrorException: {}
+2025-07-09 15:41:48 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-09 15:41:48.133] [SECURITY-ERROR] AccessErrorException: {}
+2025-07-09 15:41:49 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-09 15:41:49.491] [SECURITY-ERROR] AccessErrorException: {}
+2025-07-09 15:41:50 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-09 15:41:50.750] [SECURITY-ERROR] AccessErrorException: {}
+2025-07-09 15:41:51 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-09 15:41:51.996] [SECURITY-ERROR] AccessErrorException: {}
+2025-07-09 15:41:53 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-09 15:41:53.163] [SECURITY-ERROR] AccessErrorException: {}
+2025-07-09 15:41:54 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-09 15:41:54.394] [SECURITY-ERROR] AccessErrorException: {}
+2025-07-09 15:41:55 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-09 15:41:55.908] [SECURITY-ERROR] AccessErrorException: {}
+2025-07-09 15:41:57 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-09 15:41:57.162] [SECURITY-ERROR] AccessErrorException: {}
+2025-07-09 15:41:58 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-09 15:41:58.367] [SECURITY-ERROR] AccessErrorException: {}
+2025-07-09 15:41:59 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-09 15:41:59.747] [SECURITY-ERROR] AccessErrorException: {}
+2025-07-09 15:42:01 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-09 15:42:01.178] [SECURITY-ERROR] AccessErrorException: {}
+2025-07-09 15:42:02 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-09 15:42:02.330] [SECURITY-ERROR] AccessErrorException: {}
+2025-07-09 15:42:03 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-09 15:42:03.658] [SECURITY-ERROR] AccessErrorException: {}
+2025-07-09 15:42:04 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-09 15:42:04.962] [SECURITY-ERROR] AccessErrorException: {}
+2025-07-09 15:42:06 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-09 15:42:06.354] [SECURITY-ERROR] AccessErrorException: {}
+2025-07-09 15:42:07 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-09 15:42:07.611] [SECURITY-ERROR] AccessErrorException: {}
+2025-07-09 15:42:37 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-09 15:42:37.473] [SECURITY-ERROR] AccessErrorException: {}
+2025-07-09 15:42:48 [reactor-http-epoll-3] ERROR c.g.g.common.logging.LoggingService - [2025-07-09 15:42:48.672] [SECURITY-ERROR] NoTokenException: Debes ingresar un token de acceso

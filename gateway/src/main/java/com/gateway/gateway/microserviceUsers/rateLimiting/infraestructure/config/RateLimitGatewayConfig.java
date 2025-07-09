@@ -72,6 +72,14 @@ public class RateLimitGatewayConfig {
                     .rewritePath("/users/(?<segment>.*)", "/${segment}")
                     .filter(rateLimitGatewayFilter.apply(createConfig("delete_user"))))
                 .uri("lb://users-service"))
+
+            .route("users-find-by-email", r -> r
+                .path("/users/register/email")
+                .and().method("GET")
+                .filters(f -> f
+                    .rewritePath("/users/(?<segment>.*)", "/${segment}")
+                    .filter(rateLimitGatewayFilter.apply(createConfig("find_by_email"))))
+                .uri("lb://users-service"))
                 
             // Rutas de términos y condiciones con rate limiting
             .route("users-terms-get-active", r -> r
