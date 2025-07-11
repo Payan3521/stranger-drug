@@ -1,10 +1,17 @@
 package com.microserviceone.users.termsAndConditionsApi.infraestructure.persistance.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "accepted_terms")
+@NoArgsConstructor
+@Getter
+@Setter
 public class AcceptedEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,30 +32,4 @@ public class AcceptedEntity {
 
     @Column(nullable = false)
     private String ip;
-
-    // Constructors
-    public AcceptedEntity() {}
-
-    // Getters and Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    public Long getUserId() { return userId; }
-    public void setUserId(Long userId) { this.userId = userId; }
-
-    public String getUserEmail() { return userEmail; }
-    public void setUserEmail(String userEmail) { this.userEmail = userEmail; }
-
-    public LocalDateTime getFechaHoraDeAceptacion() { return fechaHoraDeAceptacion; }
-    public void setFechaHoraDeAceptacion(LocalDateTime fechaHoraDeAceptacion) { 
-        this.fechaHoraDeAceptacion = fechaHoraDeAceptacion; 
-    }
-
-    public TermAndConditionEntity getTerminoAceptado() { return terminoAceptado; }
-    public void setTerminoAceptado(TermAndConditionEntity terminoAceptado) { 
-        this.terminoAceptado = terminoAceptado; 
-    }
-
-    public String getIp() { return ip; }
-    public void setIp(String ip) { this.ip = ip; }
 } 

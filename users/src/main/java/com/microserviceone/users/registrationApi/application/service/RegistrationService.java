@@ -10,13 +10,15 @@ import com.microserviceone.users.registrationApi.domain.port.in.IFindById;
 import com.microserviceone.users.registrationApi.domain.port.in.ISaveAdmin;
 import com.microserviceone.users.registrationApi.domain.port.in.ISaveCustomer;
 import com.microserviceone.users.registrationApi.domain.port.in.IUpdate;
+import com.microserviceone.users.registrationApi.domain.port.in.IUpdateLastLogin;
+
 import java.util.List;
 import java.util.Optional;
 import com.microserviceone.users.core.logging.LoggingService;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class RegistrationService implements ISaveAdmin, ISaveCustomer, IDelete, IUpdate, IFindByFilters, IFindById, IFindByEmail{
+public class RegistrationService implements ISaveAdmin, ISaveCustomer, IDelete, IUpdate, IFindByFilters, IFindById, IFindByEmail, IUpdateLastLogin{
 
     private final ISaveAdmin saveAdmin;
     private final ISaveCustomer saveCustomer;
@@ -25,6 +27,7 @@ public class RegistrationService implements ISaveAdmin, ISaveCustomer, IDelete, 
     private final IUpdate updateUseCase;
     private final IDelete deleteUseCase;
     private final IFindByEmail findByEmailUseCase;
+    private final IUpdateLastLogin updateLastLoginUseCase;
     private final LoggingService loggingService;
 
     @Override
@@ -150,6 +153,21 @@ public class RegistrationService implements ISaveAdmin, ISaveCustomer, IDelete, 
             
         } catch (Exception e) {
             loggingService.logError("RegistrationService: Error al buscar usuario por email - Email: {}", email, e);
+            throw e;
+        }
+    }
+
+    @Override
+    public Optional<User> updateLastLogin(Long id) {
+        
+        try{ 
+            loggingService.logInfo("RegistrationService: Iniciando actualización por id -Id", id);
+            Optional<User> user = updateLastLoginUseCase.updateLastLogin(id);
+
+            loggingService.logInfo("RegistrationService: Actualización por id completada con id -Id", user.get().getId());
+            return user;
+        } catch(Exception e){
+            loggingService.logError("Error al actualizar usuario con id -Id {}", id, e);
             throw e;
         }
     }

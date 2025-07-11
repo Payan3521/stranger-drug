@@ -5,6 +5,8 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -66,7 +68,7 @@ public class RegisterControllerTest {
                                "Password123!", "3127147814", LocalDate.of(1990, 1, 1));
         
         savedCustomer = new Customer(1L, "Juan", "Pérez", "juan.perez@gmail.com", 
-                                   "hashedPassword", "3127147814", LocalDate.of(1990, 1, 1), 
+                                   "hashedPassword", "3127147814" , LocalDateTime.now(), LocalDate.of(1990, 1, 1), 
                                    false, false);
 
 

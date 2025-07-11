@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -363,6 +364,34 @@ public class RegisterController {
                 
         } catch (Exception e) {
             loggingService.logError("Error al buscar usuario por email - Email: {}", email, e);
+            throw e;
+        }
+    }
+
+    @Operation(summary = "Actualiza el campo de cuando fue la ultima vez que el usuario hizo login", description = "Actualiza campo de login por ultima vez")
+    @ApiResponses(value = {
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Se actualizó correctamente",
+            content = @Content(schema = @Schema(implementation = UserResponse.class))),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Custommer no encontrado")
+    })
+    @PatchMapping("/id/{id}")
+    public ResponseEntity<ApiResponse<UserResponse>> updateLastLogin(
+        @Parameter(description = "Id del usuario", required = true) @PathVariable Long id){
+        try{ 
+            loggingService.logInfo("Iniciando actualización por id -id: {}", id );
+
+            Optional<User> userOptional = registrationService.updateLastLogin(id);
+
+            loggingService.logInfo("Sacando objeto user de optional con id -id: {}",id);
+            User user = userOptional.get();
+
+            loggingService.logDebug("Mapeando respuesta para usuario encontrado con id -id: {}", user.getId());
+            UserResponse userResponse = registrationWebMapper.toResponse(user);
+
+            loggingService.logInfo("Usario con campo modificado exitosamente -Email {}", user.getEmail() );
+            return ResponseEntity.ok(ApiResponse.success("User update successfully", userResponse));
+        } catch (Exception e){
+            loggingService.logError("Error al actualizar campo de usuario -ID id: {}", id);
             throw e;
         }
     }

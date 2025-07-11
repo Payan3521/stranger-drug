@@ -1,5 +1,6 @@
 package com.microserviceone.users.registrationApi.domain.model;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 import lombok.Data;
 import lombok.Getter;
@@ -18,16 +19,17 @@ public abstract class User {
     protected String password;
     protected String phone;
     protected UserRole rol;
+    protected LocalDateTime lastLogin;
     protected boolean verifiedCode;
     protected boolean verifiedTerm;
     
 
     protected User(String name, String lastName, String email, String password, String phone, UserRole rol){
-        this(null, name, lastName, email, password, phone, rol,  false, false);
+        this(null, name, lastName, email, password, phone, rol, null, false, false);
     }
 
     protected User(Long id, String name, String lastName, String email, String password, 
-                  String phone, UserRole rol, boolean verifiedCode, boolean verifiedTerm){
+                  String phone, UserRole rol, LocalDateTime lastLogin, boolean verifiedCode, boolean verifiedTerm){
         this.id= id;
         this.name = Objects.requireNonNull(name, "Name cannot be null");
         this.lastName = Objects.requireNonNull(lastName, "Last name cannot be null");
@@ -35,6 +37,7 @@ public abstract class User {
         this.password = Objects.requireNonNull(password, "Password cannot be null");
         this.phone = Objects.requireNonNull(phone, "Phone cannot be null");
         this.rol = Objects.requireNonNull(rol, "Role cannot be null");
+        this.lastLogin = lastLogin;
         this.verifiedCode = verifiedCode;
         this.verifiedTerm = verifiedTerm;
 

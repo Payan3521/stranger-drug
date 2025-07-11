@@ -85,6 +85,7 @@ public class RegistrationWebMapper {
             response.setPassword(user.getPassword());
             response.setPhone(user.getPhone());
             response.setRol(user.getRol().name());
+            response.setLastLogin(user.getLastLogin());
             response.setVerifiedCode(user.isVerifiedCode());
             response.setVerifiedTerm(user.isVerifiedTerm());
             
@@ -110,6 +111,5 @@ public class RegistrationWebMapper {
                 user.getId(), user.getEmail(), e);
             throw e;
         }
-    }
-   
+    } 
 }

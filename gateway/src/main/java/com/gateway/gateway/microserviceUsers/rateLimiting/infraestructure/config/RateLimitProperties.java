@@ -31,6 +31,7 @@ public class RateLimitProperties {
         endpointLimits.put("find_users_filters", 30);
         endpointLimits.put("update_customer", 5);
         endpointLimits.put("update_admin", 5);
+        endpointLimits.put("update_lastLogin", 3);
         endpointLimits.put("delete_user", 4);
         endpointLimits.put("find_by_email", 15);
         

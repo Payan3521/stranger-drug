@@ -12,6 +12,7 @@ import com.microserviceone.users.registrationApi.domain.port.in.IFindById;
 import com.microserviceone.users.registrationApi.domain.port.in.ISaveAdmin;
 import com.microserviceone.users.registrationApi.domain.port.in.ISaveCustomer;
 import com.microserviceone.users.registrationApi.domain.port.in.IUpdate;
+import com.microserviceone.users.registrationApi.domain.port.in.IUpdateLastLogin;
 import com.microserviceone.users.registrationApi.domain.port.out.IRegisterRepository;
 import com.microserviceone.users.registrationApi.infraestructure.persistance.adapter.AdapterRegister;
 
@@ -25,7 +26,7 @@ public class AppConfigRegister {
     }
 
     @Bean
-    public RegistrationService registrationService(ISaveAdmin saveAdmin, ISaveCustomer saveCustomer, IFindById findById, IFindByFilters findByFilters, IDelete delete, IUpdate update, LoggingService loggingService, IFindByEmail findByEmail){
-        return new RegistrationService(saveAdmin, saveCustomer, findById, findByFilters, update, delete, findByEmail, loggingService);
+    public RegistrationService registrationService(ISaveAdmin saveAdmin, ISaveCustomer saveCustomer, IFindById findById, IFindByFilters findByFilters, IDelete delete, IUpdate update, LoggingService loggingService, IFindByEmail findByEmail, IUpdateLastLogin updateLastLogin){
+        return new RegistrationService(saveAdmin, saveCustomer, findById, findByFilters, update, delete, findByEmail, updateLastLogin, loggingService);
     }
 }
