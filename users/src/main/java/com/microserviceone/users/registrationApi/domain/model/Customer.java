@@ -1,6 +1,7 @@
 package com.microserviceone.users.registrationApi.domain.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import com.microserviceone.users.registrationApi.domain.exception.AgeIllegalException;
@@ -29,8 +30,8 @@ public class Customer extends User{
     }
 
     public Customer(Long id, String name, String lastName, String email, String password, 
-                   String phone, LocalDate birthDate, boolean verifiedCode, boolean verifiedTerm){
-        super(id, name, lastName, email, password, phone, UserRole.CUSTOMER, verifiedCode, verifiedTerm);
+                   String phone, LocalDateTime lastLogin, LocalDate birthDate, boolean verifiedCode, boolean verifiedTerm){
+        super(id, name, lastName, email, password, phone, UserRole.CUSTOMER, lastLogin, verifiedCode, verifiedTerm);
         this.birthDate = Objects.requireNonNull(birthDate, "Birth date avion be null");
     }
 

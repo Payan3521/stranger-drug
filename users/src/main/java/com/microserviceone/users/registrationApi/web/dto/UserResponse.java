@@ -1,6 +1,7 @@
 package com.microserviceone.users.registrationApi.web.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -16,6 +17,7 @@ public class UserResponse {
     private String password;
     private String phone;
     private String rol;
+    private LocalDateTime lastLogin;
     private LocalDate birthDate; // Only for customers
     private String area; // Only for admins
     private boolean verifiedCode;

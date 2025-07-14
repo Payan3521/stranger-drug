@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.client.HttpClientErrorException;
-
 import com.microserviceone.users.core.config.internalSecurity.InternalJwtService;
 import com.microserviceone.users.core.logging.LoggingService;
 import com.microserviceone.users.registrationApi.application.exception.UserPrerequisitesNotMetException;
@@ -54,7 +53,7 @@ public class UserValidationService {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.setBearerAuth(jwt);
-            System.out.println("jwt" + jwt);
+    
 
             HttpEntity<AcceptedMultipleRequest> entity = new HttpEntity<>(request, headers);
             

@@ -1,7 +1,6 @@
 package com.microservicesix.login.autheticationApi.infraestructure.persistance.mapper;
 
 import org.springframework.stereotype.Component;
-
 import com.microservicesix.login.autheticationApi.domain.model.LoginAttempt;
 import com.microservicesix.login.autheticationApi.infraestructure.persistance.entity.LoginAttemptEntity;
 

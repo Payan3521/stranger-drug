@@ -1,5 +1,6 @@
 package com.microserviceone.users.registrationApi.infraestructure.persistance.entity;
 
+import java.time.LocalDateTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -45,6 +46,9 @@ public class UserEntity {
 
     @Column(name = "rol", nullable = false)
     protected String rol; 
+
+    @Column(name = "last_login")
+    protected LocalDateTime lastLogin;
 
     @Column(name = "verified_code", nullable = false)
     protected boolean verifiedCode;

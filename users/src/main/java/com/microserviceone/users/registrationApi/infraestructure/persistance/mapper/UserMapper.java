@@ -64,6 +64,7 @@ public class UserMapper {
                         customerEntity.getEmail(),
                         customerEntity.getPassword(),
                         customerEntity.getPhone(),
+                        customerEntity.getLastLogin(),
                         customerEntity.getBirthDate(),
                         customerEntity.isVerifiedCode(),
                         customerEntity.isVerifiedTerm()
@@ -82,6 +83,7 @@ public class UserMapper {
                         adminEntity.getEmail(),
                         adminEntity.getPassword(),
                         adminEntity.getPhone(),
+                        adminEntity.getLastLogin(),
                         adminEntity.getArea(),
                         adminEntity.isVerifiedCode(),
                         adminEntity.isVerifiedTerm()
@@ -113,6 +115,7 @@ public class UserMapper {
             entity.setPassword(domain.getPassword());
             entity.setPhone(domain.getPhone());
             entity.setRol(domain.getRol().name());
+            entity.setLastLogin(domain.getLastLogin());
             entity.setVerifiedCode(domain.isVerifiedCode());
             entity.setVerifiedTerm(domain.isVerifiedTerm());
             

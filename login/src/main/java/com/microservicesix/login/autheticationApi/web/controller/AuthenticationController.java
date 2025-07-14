@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import com.microservicesix.login.autheticationApi.application.service.AuthenticationService;
 import com.microservicesix.login.autheticationApi.domain.model.AuthenticationResult;
 import com.microservicesix.login.autheticationApi.web.dto.ApiResponse;
@@ -13,7 +12,6 @@ import com.microservicesix.login.autheticationApi.web.dto.LoginResponse;
 import com.microservicesix.login.autheticationApi.web.dto.LogoutRequest;
 import com.microservicesix.login.autheticationApi.web.dto.RefreshTokenRequest;
 import com.microservicesix.login.autheticationApi.web.webMapper.AuthenticationWebMapper;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;

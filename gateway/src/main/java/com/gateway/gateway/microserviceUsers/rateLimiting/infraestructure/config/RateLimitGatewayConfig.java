@@ -65,6 +65,14 @@ public class RateLimitGatewayConfig {
                     .filter(rateLimitGatewayFilter.apply(createConfig("update_customer"))))
                 .uri("lb://users-service"))
                 
+            .route("users-update-lastLogin", r -> r
+                .path("/users/register/id/*")
+                .and().method("PATCH")
+                .filters(f -> f
+                    .rewritePath("/users/(?<segment>.*)", "/${segment}")
+                    .filter(rateLimitGatewayFilter.apply(createConfig("update_lastLogin"))))
+                .uri("lb://users-service"))
+                
             .route("users-delete", r -> r
                 .path("/users/register/id/*")
                 .and().method("DELETE")

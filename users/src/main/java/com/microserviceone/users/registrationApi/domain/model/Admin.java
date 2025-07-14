@@ -1,5 +1,6 @@
 package com.microserviceone.users.registrationApi.domain.model;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,8 +19,8 @@ public class Admin extends User{
     }
 
     public Admin(Long id, String name, String lastName, String email, String password, 
-                String phone, String area, boolean verifiedCode, boolean verifiedTerm) {
-        super(id, name, lastName, email, password, phone,UserRole.ADMIN, verifiedCode, verifiedTerm);
+                String phone, LocalDateTime lastLogin, String area, boolean verifiedCode, boolean verifiedTerm) {
+        super(id, name, lastName, email, password, phone, UserRole.ADMIN, lastLogin, verifiedCode, verifiedTerm);
         this.area = Objects.requireNonNull(area, "Area cannot be null");
     }
 
