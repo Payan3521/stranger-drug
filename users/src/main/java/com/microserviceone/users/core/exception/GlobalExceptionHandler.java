@@ -21,6 +21,8 @@ import com.microserviceone.users.termsAndConditionsApi.application.exception.Ter
 import com.microserviceone.users.verificationCodeApi.application.exception.CodeIsNotValidException;
 import com.microserviceone.users.verificationCodeApi.application.exception.CodeNotFoundException;
 import com.microserviceone.users.verificationCodeApi.application.exception.EmailNotVerifiedException;
+import com.microserviceone.users.core.exception.jwt.MissingInternalJwtException;
+import com.microserviceone.users.core.exception.jwt.InvalidInternalJwtIssuerException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -201,5 +203,27 @@ public class GlobalExceptionHandler {
         body.put("error", "Tipo de contenido no soportado");
         body.put("message", "Se esperaba Content-Type: application/json");
         return new ResponseEntity<>(body, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
+    }
+
+    // ================== EXCEPCIONES JWT INTERNO ==================
+
+    @ExceptionHandler(MissingInternalJwtException.class)
+    public ResponseEntity<Map<String, Object>> handleMissingInternalJwtException(MissingInternalJwtException ex) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", HttpStatus.UNAUTHORIZED.value());
+        body.put("error", "Token interno no enviado");
+        body.put("message", ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(InvalidInternalJwtIssuerException.class)
+    public ResponseEntity<Map<String, Object>> handleInvalidInternalJwtIssuerException(InvalidInternalJwtIssuerException ex) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", HttpStatus.UNAUTHORIZED.value());
+        body.put("error", "Issuer del token interno inválido");
+        body.put("message", ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
     }
 }

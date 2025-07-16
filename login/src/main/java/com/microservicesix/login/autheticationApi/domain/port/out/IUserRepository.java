@@ -1,7 +1,6 @@
 package com.microservicesix.login.autheticationApi.domain.port.out;
 
 import java.util.Optional;
-
 import com.microservicesix.login.autheticationApi.domain.model.User;
 
 public interface IUserRepository {
