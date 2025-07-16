@@ -1,8 +1,8 @@
 package com.microserviceone.users.core.config.internalSecurity;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -16,6 +16,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import com.microserviceone.users.core.logging.LoggingService;
+import com.microserviceone.users.core.exception.jwt.MissingInternalJwtException;
+import com.microserviceone.users.core.exception.jwt.InvalidInternalJwtIssuerException;
 
 @Component
 public class InternalJwtFilter extends OncePerRequestFilter {
@@ -25,14 +27,25 @@ public class InternalJwtFilter extends OncePerRequestFilter {
     @Value("${internal-jwt.secret}")
     private String secret;
 
-    // Endpoints que requieren token JWT interno
-    private final List<String> protectedPaths = Arrays.asList(
-        "/verification/status",
-        "/terms/accept/multiple"
-    );
+    // Endpoints que requieren token JWT interno y su issuer esperado
+    private final Map<String, String> protectedPathToIssuer = new HashMap<>() {{
+        put("/verification/status", "user-service");
+        put("/terms/accept/multiple", "user-service");
+        put("/register/email", "login-service");
+        put("/register/id/", "login-service"); // prefijo para soportar /register/id/{id}
+    }};
 
     public InternalJwtFilter(LoggingService loggingService) {
         this.loggingService = loggingService;
+    }
+
+    private String getExpectedIssuer(String requestPath) {
+        for (Map.Entry<String, String> entry : protectedPathToIssuer.entrySet()) {
+            if (requestPath.startsWith(entry.getKey())) {
+                return entry.getValue();
+            }
+        }
+        return null;
     }
 
     @Override
@@ -59,9 +72,7 @@ public class InternalJwtFilter extends OncePerRequestFilter {
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             loggingService.logWarning("InternalJwtFilter: Header Authorization ausente o inválido");
-            response.setContentType("application/json");
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-            return;
+            throw new MissingInternalJwtException("No se envió el token interno en la cabecera Authorization o el formato es inválido");
         } 
 
         String token = authHeader.replace("Bearer ", "");
@@ -73,16 +84,16 @@ public class InternalJwtFilter extends OncePerRequestFilter {
                 .build()
                 .parseClaimsJws(token);
 
-            // Validar issuer (corregido el nombre del servicio)
+            // Validar issuer según el endpoint
             String issuer = claims.getBody().getIssuer();
             loggingService.logDebug("InternalJwtFilter: Token issuer: {}", issuer);
-            
-            if (!"user-service".equals(issuer)) {
-                loggingService.logWarning("InternalJwtFilter: Issuer inválido: {} - Esperado: user-service", issuer);
-                throw new JwtException("Issuer inválido: " + issuer);
+            String expectedIssuer = getExpectedIssuer(requestPath);
+            if (expectedIssuer == null || !expectedIssuer.equals(issuer)) {
+                loggingService.logWarning("InternalJwtFilter: Issuer inválido: {} - Esperado: {} para path: {}", issuer, expectedIssuer, requestPath);
+                throw new InvalidInternalJwtIssuerException("Issuer inválido: " + issuer + ". Se esperaba: " + expectedIssuer);
             }
 
-            loggingService.logInfo("InternalJwtFilter: Validación JWT interna exitosa - Issuer: {}", issuer);
+            loggingService.logInfo("InternalJwtFilter: Validación JWT interna exitosa - Issuer: {} para path: {}", issuer, requestPath);
 
         } catch (JwtException e) {
             loggingService.logError("InternalJwtFilter: Validación JWT interna fallida: {}", e.getMessage());
@@ -97,9 +108,6 @@ public class InternalJwtFilter extends OncePerRequestFilter {
     }
 
     private boolean requiresJwtValidation(String requestPath) {
-        // CAMBIO CRÍTICO: usar equals() en lugar de startsWith()
-        boolean requires = protectedPaths.stream().anyMatch(path -> requestPath.equals(path));
-        loggingService.logDebug("InternalJwtFilter: Path '{}' requiere JWT: {}", requestPath, requires);
-        return requires;
+        return getExpectedIssuer(requestPath) != null;
     }
 }

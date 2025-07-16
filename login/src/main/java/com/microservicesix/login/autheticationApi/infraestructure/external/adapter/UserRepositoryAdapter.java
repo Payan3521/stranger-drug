@@ -45,8 +45,20 @@ public class UserRepositoryAdapter implements IUserRepository {
 
     @Override
     public void updateLastLogin(String email) {
-        // Por ahora no implementamos la actualización del último login
-        // Se puede agregar un endpoint en el microservicio de usuarios si es necesario
-       
+        try {
+            // 1. Buscar usuario por email para obtener el id
+            String token = internalJwtService.generateToken("login-service");
+            String authHeader = "Bearer " + token;
+            ApiResponse<UserResponse> response = userServiceClient.findUserByEmail(email, authHeader);
+    
+            if (response.isSuccess() && response.getData() != null) {
+                Long userId = response.getData().getId();
+    
+                // 2. Llamar PATCH /register/id/{id}
+                userServiceClient.updateLastLogin(userId, authHeader);
+            }
+        } catch (Exception e) {
+            // Manejo de error
+        }
     }
 }
